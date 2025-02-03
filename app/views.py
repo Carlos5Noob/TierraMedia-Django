@@ -4,6 +4,7 @@ from django.views.generic import TemplateView, ListView
 
 # Create your views here.
 
+
 class HomeView(TemplateView):
     template_name = "index.html"
 
@@ -22,3 +23,6 @@ class ListWeapons(ListView):
 
     def get_queryset(self):
         return Arma.objects.all()
+
+
+
