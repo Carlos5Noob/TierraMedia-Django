@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.utils.translation.template import context_re
 from django.views.generic import TemplateView, ListView
-
+from .models import Personaje, Arma
 # Create your views here.
 
 

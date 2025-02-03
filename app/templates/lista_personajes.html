@@ -8,12 +8,18 @@
 </head>
 <body>
 
-    <ul>
-       {% for personaje in personajes %}
-           <li>{{ personaje }}</li>
-       {% endfor %}
+    {% if personajes %}
 
-    </ul>
+
+        <ul>
+
+           {% for personaje in personajes %}
+               <li>{{ personaje }}</li>
+           {% endfor %}
+
+        </ul>
+
+    {% endif %}
 
 </body>
 </html>

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from app.models import Personaje, Arma
+from .models import Personaje, Arma
 
 # Register your models here.
 
