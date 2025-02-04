@@ -8,22 +8,26 @@
 
     <h1>Formulario de combate</h1>
 
+    {% if mensaje_error %}
+    	<p style="color: red;">{{ mensaje_error }}</p>
+    {% endif %}
+
     <h3>Seleccione sus combatientes</h3>
 
-    <form method="post">
+    <form method="post" action="{% url 'comprueba' %}">
         {% csrf_token %}
         <label for="jugador1">Jugador 1:
             <select name="jugador1" id="jugador1">
-                {% for personajes in personajes %}
-                    <li>{{ personajes.nombre }}</li>
+                {% for personaje in personajes %}
+                    <option value="{{ personaje.id }}">{{ personaje.nombre }}</option>
                 {% endfor %}
             </select>
         </label>
         <br>
         <label for="jugador2">Jugador 2:
             <select name="jugador2" id="jugador2">
-                {% for personajes in personajes %}
-                    <li>{{ personajes.nombre }}</li>
+                {% for personaje in personajes %}
+                    <option value="{{ personaje.id }}">{{ personaje.nombre }}</option>
                 {% endfor %}
             </select>
         </label>

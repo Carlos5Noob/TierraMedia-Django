@@ -6,4 +6,5 @@ urlpatterns = [
     path('personajes/', views.ListCharacters.as_view(), name='personajes'),
     path('armas/', views.ListWeapons.as_view(), name='armas'),
     path('seleccion-pj/', views.FormList.as_view(), name='seleccion-pj'),
+    path('comprueba/', views.Combate.as_view(), name='comprueba'),
 ]
