@@ -17,7 +17,15 @@
         <ul>
 
            {% for personaje in personajes %}
-               <li>{{ personaje }}</li>
+               <li>
+                   {{ personaje }}
+                   <ul>
+                       <li>Salud: {{ personaje.salud }}</li>
+                       <li>Arma: {{ personaje.arma }}</li>
+                       <li>Facción: {{ personaje.faccion }}</li>
+                       <li>Ubicación: {{ personaje.ubicacion }}</li>
+                   </ul>
+               </li>
            {% endfor %}
 
         </ul>
