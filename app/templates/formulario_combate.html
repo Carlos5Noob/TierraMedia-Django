@@ -11,21 +11,23 @@
     <h3>Seleccione sus combatientes</h3>
 
     <form method="post">
-    {% csrf_token %}
-        <label for="jugador1">Combate:
+        {% csrf_token %}
+        <label for="jugador1">Jugador 1:
             <select name="jugador1" id="jugador1">
                 {% for personajes in personajes %}
                     <li>{{ personajes.nombre }}</li>
                 {% endfor %}
             </select>
         </label>
-        <label for="jugador2">Combate:
+        <br>
+        <label for="jugador2">Jugador 2:
             <select name="jugador2" id="jugador2">
                 {% for personajes in personajes %}
                     <li>{{ personajes.nombre }}</li>
                 {% endfor %}
             </select>
         </label>
+        <br>
         <button type="submit">Empezar combate</button>
     </form>
 
