@@ -6,11 +6,11 @@ from .models import Personaje, Arma
 
 
 class HomeView(TemplateView):
-    template_name = "index.html"
+    template_name = "app/index.html"
 
 class ListCharacters(ListView):
     model = Personaje
-    template_name = "lista_personajes.html"
+    template_name = "app/lista_personajes.html"
     context_object_name = "personajes"
 
     def get_queryset(self):
@@ -18,7 +18,7 @@ class ListCharacters(ListView):
 
 class ListWeapons(ListView):
     model = Arma
-    template_name = "lista_armas.html"
+    template_name = "app/lista_armas.html"
     context_object_name = "armas"
 
     def get_queryset(self):
