@@ -8,14 +8,25 @@
 </head>
 <body>
 
+
     <h1>Personajes jugables: </h1>
 
     <ul>
        {% for personaje in personajes %}
            <li>{{ personaje }}</li>
        {% endfor %}
+    {% if personajes %}
 
-    </ul>
+
+        <ul>
+
+           {% for personaje in personajes %}
+               <li>{{ personaje }}</li>
+           {% endfor %}
+
+        </ul>
+
+    {% endif %}
 
 </body>
 </html>
