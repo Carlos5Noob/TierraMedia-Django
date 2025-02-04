@@ -7,23 +7,33 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
+    <div>
+        <h1 style="">¡Bienvenido, {{ usuario }}!</h1>
 
-    <h1 style="">¡Bienvenido!</h1>
+        <div>
+            <a href="{% url 'index' %}">
+                <button type="button" class="btn btn-outline-secondary">Página Principal</button>
+            </a>
+        </div>
 
-    <a href="{% url 'index' %}">
-        <button type="button" class="btn btn-outline-secondary">Página Principal</button>
-    </a>
+        <div>
+            <a href="{% url 'personajes' %}">
+                <button type="button" class="btn btn-outline-secondary">Lista de Personajes</button>
+            </a>
+        </div>
 
-    <a href="{% url 'personajes' %}">
-        <button type="button" class="btn btn-outline-secondary">Lista de Personajes</button>
-    </a>
+        <div>
+            <a href="{% url 'armas' %}">
+                <button type="button" class="btn btn-outline-secondary">Lista de Armas</button>
+            </a>
+        </div>
 
-    <a href="{% url 'armas' %}">
-        <button type="button" class="btn btn-outline-secondary">Lista de Armas</button>
-    </a>
-
-
-
+        <div>
+            <a href="{% url '' %}">
+                <button type="button" class="btn btn-outline-secondary">¡Combate!</button>
+            </a>
+        </div>
+    </div>
 
 </body>
 </html>
