@@ -1,5 +1,3 @@
-import requests
-from django.shortcuts import render
 from django.views.generic import TemplateView, ListView
 from .models import Personaje, Arma
 # Create your views here.
@@ -34,10 +32,7 @@ class ListWeapons(ListView):
 
 
 class Combate:
-
-    def combate(self):
-        j1 = requests.get("j1")
-        j2 = requests.get("j2")
+ pass
 
 
 
