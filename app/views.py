@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.utils.translation.template import context_re
 from django.views.generic import TemplateView, ListView
-from .models import Personaje, Arma
+from .models import Personaje, Arma, Faccion
+
+
 # Create your views here.
 
 
@@ -24,5 +26,10 @@ class ListWeapons(ListView):
     def get_queryset(self):
         return Arma.objects.all()
 
+class ListFactions(ListView):
+    model = Faccion
+    template_name = "app/lista_facciones.html"
+    context_object_name = "facciones"
 
-
+    def get_queryset(self):
+        return Faccion.objects.all()
