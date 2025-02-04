@@ -20,4 +20,5 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('game/', include("app.urls")),
+    path('tierramedia/', include("django.contrib.auth.urls")),
 ]
