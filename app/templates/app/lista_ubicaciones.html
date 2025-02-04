@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista Ubicaciones</title>
+</head>
+<body>
+
+    <h1>Ubicaciones disponibles</h1>
+
+        <ul>
+
+           {% for ubicacion in ubicaciones %}
+               <li>{{ ubicacion }}</li>
+           {% endfor %}
+
+        </ul>
+
+</body>
+</html>

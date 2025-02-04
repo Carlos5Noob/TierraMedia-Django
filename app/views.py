@@ -1,16 +1,16 @@
 from django.shortcuts import render
 from django.utils.translation.template import context_re
 from django.views.generic import TemplateView, ListView
-from .models import Personaje, Arma
+from .models import Personaje, Arma, Ubicacion
 # Create your views here.
 
 
 class HomeView(TemplateView):
-    template_name = "index.html"
+    template_name = "app/index.html"
 
 class ListCharacters(ListView):
     model = Personaje
-    template_name = "lista_personajes.html"
+    template_name = "app/lista_personajes.html"
     context_object_name = "personajes"
 
     def get_queryset(self):
@@ -18,11 +18,20 @@ class ListCharacters(ListView):
 
 class ListWeapons(ListView):
     model = Arma
-    template_name = "lista_armas.html"
+    template_name = "app/lista_armas.html"
     context_object_name = "armas"
 
     def get_queryset(self):
         return Arma.objects.all()
+
+class Ubicaciones(ListView):
+    model = Ubicacion
+    template_name = "app/lista_ubicaciones.html"
+    context_object_name = "ubicaciones"
+
+    def get_queryset(self):
+        return Ubicacion.objects.all()
+
 
 
 

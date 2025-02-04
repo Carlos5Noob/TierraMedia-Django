@@ -10,11 +10,19 @@ class Arma(models.Model):
     def __str__(self):
         return self.nombre
 
+class Ubicacion(models.Model):
+    nombre = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.nombre
+
 class Personaje(models.Model):
     nombre = models.CharField(max_length=100)
     salud = models.IntegerField()
     arma = models.ForeignKey(Arma, on_delete=models.CASCADE)
+    ubicacion = models.ForeignKey(Ubicacion, on_delete=models.CASCADE,blank=True, null=True)
 
     def __str__(self):
         return self.nombre
+
 
