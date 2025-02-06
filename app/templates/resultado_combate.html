@@ -2,12 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Resultado del combate</title>
+    <title>A pelear!!!</title>
 </head>
 <body>
 
-    <p>{{ jugador1 }}</p>
-    <p>{{ jugador2 }}</p>
+    <h1>{{ combate.nombre }}</h1>
+
+
+    <fieldset>
+        <button type="button">Atacar</button>
+        <button type="button" onclick="retirada()">Retirada</button>
+    </fieldset>
+
+    <script>
+        function retirada() {
+            alert("Huir es de corbades, no tienes escapatoria")
+        }
+    </script>
 
 </body>
 </html>

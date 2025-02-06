@@ -12,8 +12,10 @@ class Arma(models.Model):
 
 class Personaje(models.Model):
     nombre = models.CharField(max_length=100)
-    salud = models.IntegerField()
+    salud = models.IntegerField(default=200)
+    mana = models.IntegerField(default=400)
     arma = models.ForeignKey(Arma, on_delete=models.CASCADE, null=True, blank=True)
+
 
     def __str__(self):
         return self.nombre
@@ -24,4 +26,4 @@ class Combate(models.Model):
     luchador_2 = models.ForeignKey(Personaje, on_delete=models.CASCADE, null=True, blank=True, related_name='luchador_2')
 
     def __str__(self):
-            return self.nombre
+        return f"{self.nombre}: {self.luchador_1} vs {self.luchador_2}"

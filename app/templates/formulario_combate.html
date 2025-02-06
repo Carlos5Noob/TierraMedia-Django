@@ -8,14 +8,20 @@
 
     <h1>Formulario de combate</h1>
 
-    {% if mensaje_error %}
-    	<p style="color: red;">{{ mensaje_error }}</p>
-    {% endif %}
+    <ul>
+        {% if mensaje_error %}
+    	    <li style="color: red;">{{ mensaje_error }}</li>
+        {% endif %}
 
+    </ul>
+    
     <h3>Seleccione sus combatientes</h3>
 
-    <form method="post" action="{% url 'comprueba' %}">
+    <form method="post" action="{% url 'lucha' %}">
         {% csrf_token %}
+        <label for="nombre_combate">Proporcione un nombre a esta épica batalla: </label>
+        <input type="text"  name="nombre_combate" id="nombre_combate" required>
+        <br><br>
         <label for="jugador1">Jugador 1:
             <select name="jugador1" id="jugador1">
                 {% for personaje in personajes %}
@@ -23,7 +29,7 @@
                 {% endfor %}
             </select>
         </label>
-        <br>
+        <br><br>
         <label for="jugador2">Jugador 2:
             <select name="jugador2" id="jugador2">
                 {% for personaje in personajes %}
@@ -31,7 +37,7 @@
                 {% endfor %}
             </select>
         </label>
-        <br>
+        <br><br>
         <button type="submit">Empezar combate</button>
     </form>
 
