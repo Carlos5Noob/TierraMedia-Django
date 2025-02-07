@@ -1,8 +1,7 @@
 import random
 
 from django.views.generic import TemplateView, ListView
-from libxml2 import relaxNgValidCtxt
-from uaclient.api.u.pro.attach.auto.full_auto_attach.v1 import event
+
 
 from .models import Personaje, Arma
 
@@ -141,6 +140,7 @@ def combate(request, combate_id):
             "mensaje_veneno_2": mensaje_veneno_2,
             "mensaje_guardia": mensaje_guardia,
             "mensaje_dano": mensaje_dano,
+            "mensaje_j2": mensaje_j2
         })
 
     return render(request, "resultado_combate.html", {
