@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.utils.translation.template import context_re
-from django.views.generic import TemplateView, ListView
+from django.views.generic import TemplateView, ListView, DetailView
 from .models import Personaje, Arma, Faccion, Ubicacion
 
 
@@ -41,3 +41,23 @@ class Ubicaciones(ListView):
 
     def get_queryset(self):
         return Ubicacion.objects.all()
+
+class DetailCharacters(DetailView):
+    model = Personaje
+    template_name = "app/detalles-personaje.html"
+    context_object_name = "personaje"
+
+class DetailArma(DetailView):
+    model = Arma
+    template_name = "app/detalles-arma.html"
+    context_object_name = "arma"
+
+class DetailFaccion(DetailView):
+    model = Faccion
+    template_name = "app/detalles-faccion.html"
+    context_object_name = "faccion"
+
+class DetailUbicacion(DetailView):
+    model = Ubicacion
+    template_name = "app/detalles-ubicacion.html"
+    context_object_name = "ubicacion"

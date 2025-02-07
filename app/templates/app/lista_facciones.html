@@ -14,7 +14,7 @@
     <ul>
     {% for faccion in facciones %}
 
-        <li>{{ faccion }}</li>
+        <li><a href="{% url 'facciones_id' faccion.id %}">{{ faccion }}</a></li>
 
     {% endfor %}
     </ul>
