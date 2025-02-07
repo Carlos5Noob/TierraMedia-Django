@@ -6,19 +6,24 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-<body>
+<body style='background-image: url("../../static/DS.jpg"); background-repeat: no-repeat; background-size: cover;")'>
 
 
-    <h1>Personajes jugables: </h1>
+    <h1 style="color: white; text-align: center">Personajes jugables: </h1>
 
     {% if personajes %}
 
 
-        <ul>
+        <ul style="color: white" class="col-3">
 
            {% for personaje in personajes %}
+
+               <li class="list-group-item">
+                   {{ personaje }}
+
                <li>
                    <a href="{% url 'personajes_id' personaje.id %}">{{ personaje }}</a>
+
                    <ul>
                        <li>Salud: {{ personaje.salud }}</li>
                        <li>Arma: <a href="{% url 'armas_id' personaje.arma.id %}">{{ personaje.arma }}</a></li>
