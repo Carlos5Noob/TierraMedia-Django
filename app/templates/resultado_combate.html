@@ -8,17 +8,35 @@
 
     <h1>{{ combate.nombre }}</h1>
 
+    <h2>Combate entre {{ jugador1.nombre }} y {{ jugador2.nombre }}</h2>
+    <p><strong>{{ jugador2.nombre }} - Vida:</strong> {{ jugador2.vida }}</p>
 
-    <fieldset>
-        <button type="button">Atacar</button>
+    <form method="POST">
+        <button type="submit" name="accion" value="atacar">Atacar</button>
+        <button type="button" onclick="mostrar_habilidades()">Habilidades</button>
         <button type="button" onclick="retirada()">Retirada</button>
-    </fieldset>
+
+        <div id="habilidades" itemid="oculto" style="display: none">
+            <button type="submit" name="accion" value="hb1">Onda de energía : 50</button>
+            <button type="submit" name="accion" value="hb2">Veneno Oculto : 70</button>
+            <button type="submit" name="accion" value="hb3">Guardia : 30</button>
+            <button type="submit" name="accion" value="hb4">Curación : 100</button>
+        </div>
+    </form>
 
     <script>
         function retirada() {
             alert("Huir es de corbades, no tienes escapatoria")
         }
-    </script>
 
+        function mostrar_habilidades(){
+           let div = document.getElementById("habilidades")
+            if(div.style.display === "none"){
+                div.style.display = "block";
+            }else{
+                div.style.display = "none";
+            }
+        }
+    </script>
 </body>
 </html>

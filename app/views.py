@@ -1,4 +1,9 @@
+import random
+
 from django.views.generic import TemplateView, ListView
+from libxml2 import relaxNgValidCtxt
+from uaclient.api.u.pro.attach.auto.full_auto_attach.v1 import event
+
 from .models import Personaje, Arma
 
 
@@ -23,7 +28,7 @@ class ListWeapons(ListView):
     def get_queryset(self):
         return Arma.objects.all()
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Personaje, Combate
 
 def pre_combate(request):
@@ -58,14 +63,88 @@ def pre_combate(request):
 
         combate_creado = Combate.objects.create(nombre=nombre_combate, luchador_1=jugador1, luchador_2=jugador2)
 
-        return redirect("combate", combate_creado.id)
+        return redirect("combate", combate_creado.id, jugador1.id, jugador2.id)
 
     return render(request, "formulario_combate.html", {"personajes": personajes})
 
-def combate (request, combate_id):
-    personajes = Personaje.objects.all()
-    combate_creado = Combate.objects.get(id=combate_id)
 
-    return render(request, "resultado_combate.html", {"combate": combate_creado, "personajes": personajes})
+def combate(request, combate_id):
+    combate_creado = get_object_or_404(Combate, id=combate_id)
+    jugador1 = combate_creado.luchador_1
+    arma_jugador1 = Arma.objects.get(id=jugador1.arma_id)
+    jugador2 = combate_creado.luchador_2
+    arma_jugador2 = Arma.objects.get(id=jugador2.arma_id)
+    veneno = None
+    guardia = False
+
+    mensaje = ""
+    mensaje_accion = ""
+    mensaje_veneno = ""
+    mensaje_veneno_2 = ""
+    mensaje_j2 = ""
+    mensaje_guardia = ""
+    mensaje_dano = ""
 
 
+
+    if request.method == "POST":
+        accion = request.POST.get("accion")
+
+        if accion == "atacar":
+            jugador1.mana += 10
+            jugador1.save()
+            jugador2.salud -= arma_jugador1.dano
+            jugador2.save()
+            mensaje = f"{jugador1.nombre} ataca a {jugador2.nombre}. ¡Le causa {arma_jugador1.dano} puntos de daño y recupera 10 de maná"
+
+        elif "hb" in accion:
+            opcion = accion
+            mensaje = f"{jugador1.nombre} usa una habilidad especial."
+            match opcion:
+                case "hb1":
+                    mensaje_accion = f"{jugador1.nombre} lanza una onda de energía a {jugador2.nombre} causandole 200 puntos de daño."
+                    jugador2.salud -= 200
+                case "hb2":
+                    mensaje_accion = f"{jugador1.nombre} ataca con una púa venenosa a {jugador2.nombre} causandole 120 puntos de daño."
+                    jugador2.salud -= 120
+                    rng = random.randint(0,10)
+                    if rng >= 7:
+                        veneno = True
+                        mensaje_veneno = f"{jugador2.nombre} ha sido envenenado"
+                case "hb3":
+                    mensaje_accion = f"{jugador1.nombre} se prepara para recibir el ataque"
+                    guardia = True
+                case "hb4":
+                    mensaje_accion = f"{jugador1.nombre} canaliza su energía para realizar curar sus heridas"
+                    jugador1.salud += 200
+                    jugador1.save()
+
+        if veneno:
+            mensaje_veneno_2 = f"{jugador2.nombre} sufre daños de envenenamiento, pierde 100 puntos de vida"
+            jugador2.salud -= 100
+
+        mensaje_j2 = f"{jugador2.nombre} se prepara para atacar"
+
+        if guardia:
+            mensaje_guardia = f"{jugador1.nombre} ha encajado el golpe, no sufre daños"
+        else:
+            mensaje_dano = f"{jugador1.nombre} ha recibido el golpe, sufre {arma_jugador2.dano}"
+            jugador1.salud -= arma_jugador2.dano
+
+        return render(request, "resultado_combate.html", {
+            "combate": combate_creado,
+            "jugador1": jugador1,
+            "jugador2": jugador2,
+            "mensaje": mensaje,
+            "mensaje_accion": mensaje_accion,
+            "mensaje_veneno": mensaje_veneno,
+            "mensaje_veneno_2": mensaje_veneno_2,
+            "mensaje_guardia": mensaje_guardia,
+            "mensaje_dano": mensaje_dano,
+        })
+
+    return render(request, "resultado_combate.html", {
+        "combate": combate_creado,
+        "jugador1": jugador1,
+        "jugador2": jugador2,
+    })
