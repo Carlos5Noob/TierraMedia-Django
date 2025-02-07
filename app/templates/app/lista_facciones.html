@@ -10,21 +10,15 @@
 
     <div class="container p-1 my-5 mx-auto" style="box-shadow: 5px 5px 5px lightgray; background-color: #a8854d">
         <h1 style="text-align: center; color: white">Facciones disponibles: </h1>
+
         {% if facciones %}
-
-            <ul style="text-align: center; color: white">
             {% for faccion in facciones %}
-
-
-                <li style="list-style-type: none">{{ faccion }}</li>
-
-        <li><a href="{% url 'facciones_id' faccion.id %}">{{ faccion }}</a></li>
-
-
+                <ul style="text-align: center; color: white">
+                    <li style="list-style-type: none"><a href="{% url 'facciones_id' faccion.id %}">{{ faccion }}</a></li>
+                </ul>
             {% endfor %}
-            </ul>
-
         {% endif %}
+
     </div>
 </body>
 </html>
