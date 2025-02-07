@@ -12,7 +12,7 @@
 
     <ul>
        {% for arma in armas %}
-           <li>{{ arma }}</li>
+           <li><a href="{% url 'armas_id' arma.id %}">{{ arma }}</a></li>
        {% endfor %}
     </ul>
 

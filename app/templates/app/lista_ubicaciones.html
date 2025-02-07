@@ -13,7 +13,7 @@
 {% if ubicaciones %}
     {% for ubicacion in ubicaciones %}
         <ul>
-            <li>{{ ubicacion }}</li>
+            <li><a href="{% url 'ubicaciones_id' ubicacion.id %}">{{ ubicacion }}</a></li>
         </ul>
     {% endfor %}
 
