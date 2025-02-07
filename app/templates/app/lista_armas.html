@@ -13,7 +13,11 @@
 
     <ul style="color: white; text-align: center">
        {% for arma in armas %}
+
            <li style="list-style-type: none">{{ arma }}</li>
+
+           <li><a href="{% url 'armas_id' arma.id %}">{{ arma }}</a></li>
+
        {% endfor %}
     </ul>
 </div>
