@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Resolución</title>
+</head>
+<body>
+
+    <h1>Resolución del conflicto</h1>
+
+    {% if resolucion_1 %}
+        {% if combate.turnos <= 1 %}
+            <p>{{ combate.luchador_1 }} se encuentra demasiado cansado para luchar,debería ir a la taberna a descansar</p>
+        {% else %}
+            <h2>Tras una ardua batalla... {{ resolucion_1 }}...</h2>
+        {% endif %}
+    {% endif %}
+    {% if resolucion_2 %}
+        {% if combate.turnos <= 1 %}
+            <h2>{{ combate.luchador_2 }} ha sido derrotado con simpleza, que decepción...</h2>
+        {% else %}
+            <h2>Tras una ardua batalla... {{ resolucion_2 }}!!</h2>
+        {% endif %}
+    {% endif %}
+
+    <h2>¿Que desea hacer ahora?</h2>
+
+    <a href="{% url 'index' %}">Volver al inicio</a>
+    <a href="{% url 'personajes' %}">Ir al listado de personajes</a>
+    <a href="{% url 'lucha' %}">Empezar otro combate</a>
+
+</body>
+</html>
