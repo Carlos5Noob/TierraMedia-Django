@@ -9,9 +9,43 @@
     <h1>{{ combate.nombre }}</h1>
 
     <h2>Combate entre {{ jugador1.nombre }} y {{ jugador2.nombre }}</h2>
-    <p><strong>{{ jugador2.nombre }} - Vida:</strong> {{ jugador2.vida }}</p>
+    <p><strong>{{ jugador2.nombre }} - Vida:</strong> {{ jugador2.salud }}</p>
+
+    <h4>Tus estadísticas:</h4>
+    <p>Salud: {{ jugador1.salud }}</p>
+    <p>Mana: {{ jugador1.mana }}</p>
+
+    <h3>Registro del combate</h3>
+        <div class="Registro de combate ">
+            <h4>Turno {{ combate.turnos }}:</h4>
+            {% if mensaje %}
+            	<p>{{ mensaje }}</p>
+            {% endif %}
+            {% if mensaje_accion %}
+            	<p>{{ mensaje_accion }}</p>
+            {% endif %}
+            {% if mensaje_mana %}
+                <p>{{ mensaje_mana }}</p>
+            {% endif %}
+            {% if mensaje_veneno %}
+            	<p>{{ mensaje_veneno }}</p>
+            {% endif %}
+            {% if mensaje_veneno_2 %}
+                <p>{{ mensaje_veneno_2 }}</p>
+            {% endif %}
+            {% if mensaje_j2  %}
+            	<p>{{ mensaje_j2  }}</p>
+            {% endif %}
+            {% if mensaje_guardia %}
+                <p>{{ mensaje_guardia }}</p>
+            {% endif %}
+            {% if mensaje_dano %}
+            	<p>{{ mensaje_dano }}</p>
+            {% endif %}
+        </div>
 
     <form method="POST">
+        {% csrf_token %}
         <button type="submit" name="accion" value="atacar">Atacar</button>
         <button type="button" onclick="mostrar_habilidades()">Habilidades</button>
         <button type="button" onclick="retirada()">Retirada</button>

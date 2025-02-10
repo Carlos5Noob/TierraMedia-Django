@@ -62,7 +62,7 @@ def pre_combate(request):
 
         combate_creado = Combate.objects.create(nombre=nombre_combate, luchador_1=jugador1, luchador_2=jugador2)
 
-        return redirect("combate", combate_creado.id, jugador1.id, jugador2.id)
+        return redirect("combate", combate_creado.id)
 
     return render(request, "formulario_combate.html", {"personajes": personajes})
 
@@ -83,13 +83,16 @@ def combate(request, combate_id):
     mensaje_j2 = ""
     mensaje_guardia = ""
     mensaje_dano = ""
-
-
+    mensaje_mana = ""
+    derrota_j1 = ""
+    derrota_j2 = ""
 
     if request.method == "POST":
-        accion = request.POST.get("accion")
 
+        accion = request.POST.get("accion")
         if accion == "atacar":
+            combate_creado.turnos += 1
+            combate_creado.save()
             jugador1.mana += 10
             jugador1.save()
             jugador2.salud -= arma_jugador1.dano
@@ -97,38 +100,72 @@ def combate(request, combate_id):
             mensaje = f"{jugador1.nombre} ataca a {jugador2.nombre}. ¡Le causa {arma_jugador1.dano} puntos de daño y recupera 10 de maná"
 
         elif "hb" in accion:
+            combate_creado.turnos += 1
+            combate_creado.save()
             opcion = accion
             mensaje = f"{jugador1.nombre} usa una habilidad especial."
             match opcion:
                 case "hb1":
-                    mensaje_accion = f"{jugador1.nombre} lanza una onda de energía a {jugador2.nombre} causandole 200 puntos de daño."
-                    jugador2.salud -= 200
+                    if jugador1.mana >= 50:
+                        mensaje_accion = f"{jugador1.nombre} lanza una onda de energía a {jugador2.nombre} causandole 200 puntos de daño."
+                        jugador2.salud -= 200
+                        jugador1.mana -= 50
+                        jugador1.save()
+                        jugador2.save()
+                    else:
+                        mensaje_mana = f"{jugador1.nombre} no tiene suficiente mana para realizar su ataque, pierde su turno canalizando energía"
+                        jugador1.mana += 5
                 case "hb2":
-                    mensaje_accion = f"{jugador1.nombre} ataca con una púa venenosa a {jugador2.nombre} causandole 120 puntos de daño."
-                    jugador2.salud -= 120
-                    rng = random.randint(0,10)
-                    if rng >= 7:
-                        veneno = True
-                        mensaje_veneno = f"{jugador2.nombre} ha sido envenenado"
+                    if jugador1.mana >= 70:
+                        mensaje_accion = f"{jugador1.nombre} ataca con una púa venenosa a {jugador2.nombre} causandole 120 puntos de daño."
+                        jugador2.salud -= 120
+                        jugador1.mana -= 70
+                        jugador1.save()
+                        jugador2.save()
+                        rng = random.randint(0, 10)
+                        if rng >= 7:
+                            veneno = True
+                            mensaje_veneno = f"{jugador2.nombre} ha sido envenenado"
+                        else:
+                            mensaje_mana = f"{jugador1.nombre} no tiene suficiente mana para realizar su ataque, pierde su turno canalizando energía"
+                            jugador1.mana += 5
                 case "hb3":
-                    mensaje_accion = f"{jugador1.nombre} se prepara para recibir el ataque"
-                    guardia = True
+                    if jugador1.mana >= 30:
+                        mensaje_accion = f"{jugador1.nombre} se prepara para recibir el ataque"
+                        guardia = True
+                        jugador1.mana -= 30
+                        jugador1.save()
+                    else:
+                        mensaje_mana = f"{jugador1.nombre} no tiene suficiente mana para realizar su ataque, pierde su turno canalizando energía"
+                        jugador1.mana += 5
+
                 case "hb4":
-                    mensaje_accion = f"{jugador1.nombre} canaliza su energía para realizar curar sus heridas"
-                    jugador1.salud += 200
-                    jugador1.save()
+                    if jugador1.mana >= 100:
+                        jugador1.mana -= 100
+                        mensaje_accion = f"{jugador1.nombre} canaliza su energía para realizar curar sus heridas"
+                        jugador1.salud += 300
+                        jugador1.save()
+                    else:
+                        mensaje_mana = f"{jugador1.nombre} no tiene suficiente mana para realizar su ataque, pierde su turno canalizando energía"
+                        jugador1.mana += 5
 
         if veneno:
             mensaje_veneno_2 = f"{jugador2.nombre} sufre daños de envenenamiento, pierde 100 puntos de vida"
             jugador2.salud -= 100
+            jugador2.save()
+
+        if jugador2.salud <= 0:
+            derrota_j2 = f"{jugador2.nombre} ha sido derrotado, enhorabuena"
+            return render(request, "resolucion.html", {"combate": combate_creado, "resolucion_2": derrota_j2})
 
         mensaje_j2 = f"{jugador2.nombre} se prepara para atacar"
 
         if guardia:
             mensaje_guardia = f"{jugador1.nombre} ha encajado el golpe, no sufre daños"
         else:
-            mensaje_dano = f"{jugador1.nombre} ha recibido el golpe, sufre {arma_jugador2.dano}"
+            mensaje_dano = f"{jugador1.nombre} ha recibido el golpe, sufre {arma_jugador2.dano} puntos de daño"
             jugador1.salud -= arma_jugador2.dano
+            jugador1.save()
 
         return render(request, "resultado_combate.html", {
             "combate": combate_creado,
@@ -140,8 +177,12 @@ def combate(request, combate_id):
             "mensaje_veneno_2": mensaje_veneno_2,
             "mensaje_guardia": mensaje_guardia,
             "mensaje_dano": mensaje_dano,
-            "mensaje_j2": mensaje_j2
+            "mensaje_j2": mensaje_j2,
+            "mensaje_mana": mensaje_mana,
         })
+    if jugador1.salud <= 0:
+        derrota_j1 = f"{jugador1.nombre} ha sido derrotado, se acabó"
+        return render(request, "resolucion.html", {"combate": combate_creado, "resolucion_1": derrota_j1})
 
     return render(request, "resultado_combate.html", {
         "combate": combate_creado,
