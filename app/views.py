@@ -190,6 +190,8 @@ def combate(request, combate_id):
 
         if jugador2.salud <= 0:
             derrota_j2 = f"{jugador2.nombre} ha sido derrotado, enhorabuena"
+            jugador2.salud = 200
+            jugador2.save()
             return render(request, "app/resolucion.html", {"combate": combate_creado, "resolucion_2": derrota_j2})
 
         mensaje_j2 = f"{jugador2.nombre} se prepara para atacar"
