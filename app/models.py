@@ -25,8 +25,9 @@ class Faccion(models.Model):
         return self.nombre
 
 class Personaje(models.Model):
-    nombre = models.CharField(max_length=100)
+    nombre = models.CharField(max_length=120)
     salud = models.IntegerField()
+    mana = models.IntegerField(default=400)
     arma = models.ForeignKey(Arma, on_delete=models.CASCADE)
     faccion = models.ForeignKey(Faccion, on_delete=models.CASCADE, null=True, blank=True)
     ubicacion = models.ForeignKey(Ubicacion, on_delete=models.CASCADE, null=True, blank=True)
@@ -34,3 +35,11 @@ class Personaje(models.Model):
     def __str__(self):
         return self.nombre
 
+class Combate(models.Model):
+    nombre = models.CharField(max_length=100)
+    luchador_1 = models.ForeignKey(Personaje, on_delete=models.CASCADE, null=True, blank=True, related_name='luchador_1')
+    luchador_2 = models.ForeignKey(Personaje, on_delete=models.CASCADE, null=True, blank=True, related_name='luchador_2')
+    turnos = models.IntegerField(default=0)
+
+    def __str__(self):
+        return f"{self.nombre}: {self.luchador_1} vs {self.luchador_2}"

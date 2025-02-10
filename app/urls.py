@@ -11,4 +11,6 @@ urlpatterns = [
     path('armas/<int:pk>/', views.DetailArma.as_view(), name='armas_id'),
     path('facciones/<int:pk>/', views.DetailFaccion.as_view(), name='facciones_id'),
     path('ubicaciones/<int:pk>/', views.DetailUbicacion.as_view(), name='ubicaciones_id'),
+    path('combate/', views.pre_combate, name='lucha'),
+    path("combate/<int:combate_id>/", views.combate, name="combate")
 ]
