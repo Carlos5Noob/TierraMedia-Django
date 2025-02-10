@@ -1,7 +1,9 @@
 import random
 
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404, redirect
-from django.utils.translation.template import context_re
+
 from django.views.generic import TemplateView, ListView, DetailView
 from .models import Personaje, Arma, Faccion, Ubicacion, Combate
 
@@ -9,10 +11,14 @@ from .models import Personaje, Arma, Faccion, Ubicacion, Combate
 # Create your views here.
 
 
-class HomeView(TemplateView):
+class HomeView(LoginRequiredMixin, TemplateView):
     template_name = "app/index.html"
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['usuario'] = self.request.user
+        return context
 
-class ListCharacters(ListView):
+class ListCharacters(LoginRequiredMixin, ListView):
     model = Personaje
     template_name = "app/lista_personajes.html"
     context_object_name = "personajes"
@@ -20,7 +26,7 @@ class ListCharacters(ListView):
     def get_queryset(self):
         return Personaje.objects.all()
 
-class ListWeapons(ListView):
+class ListWeapons(LoginRequiredMixin, ListView):
     model = Arma
     template_name = "app/lista_armas.html"
     context_object_name = "armas"
@@ -28,7 +34,7 @@ class ListWeapons(ListView):
     def get_queryset(self):
         return Arma.objects.all()
 
-class ListFactions(ListView):
+class ListFactions(LoginRequiredMixin, ListView):
     model = Faccion
     template_name = "app/lista_facciones.html"
     context_object_name = "facciones"
@@ -36,7 +42,7 @@ class ListFactions(ListView):
     def get_queryset(self):
         return Faccion.objects.all()
 
-class Ubicaciones(ListView):
+class Ubicaciones(LoginRequiredMixin, ListView):
     model = Ubicacion
     template_name = "app/lista_ubicaciones.html"
     context_object_name = "ubicaciones"
@@ -44,26 +50,27 @@ class Ubicaciones(ListView):
     def get_queryset(self):
         return Ubicacion.objects.all()
 
-class DetailCharacters(DetailView):
+class DetailCharacters(LoginRequiredMixin, DetailView):
     model = Personaje
     template_name = "app/detalles-personaje.html"
     context_object_name = "personaje"
 
-class DetailArma(DetailView):
+class DetailArma(LoginRequiredMixin, DetailView):
     model = Arma
     template_name = "app/detalles-arma.html"
     context_object_name = "arma"
 
-class DetailFaccion(DetailView):
+class DetailFaccion(LoginRequiredMixin, DetailView):
     model = Faccion
     template_name = "app/detalles-faccion.html"
     context_object_name = "faccion"
 
-class DetailUbicacion(DetailView):
+class DetailUbicacion(LoginRequiredMixin, DetailView):
     model = Ubicacion
     template_name = "app/detalles-ubicacion.html"
     context_object_name = "ubicacion"
 
+@login_required()
 def pre_combate(request):
     """
     Aqui recogemos todos los requisitos que se necesitan antes de efectaur un combate y se comrpueban.
@@ -101,6 +108,7 @@ def pre_combate(request):
     return render(request, "app/formulario_combate.html", {"personajes": personajes})
 
 
+@login_required
 def combate(request, combate_id):
     combate_creado = get_object_or_404(Combate, id=combate_id)
     jugador1 = combate_creado.luchador_1
