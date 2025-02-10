@@ -8,6 +8,14 @@
 </head>
 <body style='background-image: url("../../static/IA estandartes.jpeg"); background-repeat: no-repeat; background-size: 1920px 1080px;")'>
 
+<header style="background-color: #1D1D1D" class="d-flex flex-wrap align-items-center justify-content-start">
+    <a href="{% url 'index' %}"><img src='../../static/home(2).png' alt='home' style='width:50px;height:50px; margin-right: 10px'></a>
+    <    <form action='{% url 'logout' %}' method='POST'>
+        {% csrf_token %}
+        <button type='submit' class='btn btn-light'>Logout</button>
+    </form>
+</header>
+
     <div class="container p-1 my-5 mx-auto" style="box-shadow: 5px 5px 5px lightgray; background-color: #a8854d">
         <h1 style="text-align: center; color: white">Facciones disponibles: </h1>
 
