@@ -25,9 +25,6 @@ Aplicación web funcional donde los usuarios al autenticarse en el sistema puede
 
 # TODO
 
-1. Adicionales - Hecho
-2. Criticos - Hecho
-3. Mejorar el jugador 2 para que haga más cosas - Hecho (Ahora puede hacer lo mismo que el jugador)
 4. Dominios 
 5. Mas habilidades (A poder ser darle unset único a cada PJ que se crea)
 6. Bufos segun escenario
@@ -46,3 +43,15 @@ Aplicación web funcional donde los usuarios al autenticarse en el sistema puede
 19. Sistema de reputación
 20. Active skills (Super chungo esto pero bueno)
 21. Sistema de tipos
+
+# Hecho
+
+1. Adicionales - Hecho
+2. Criticos - Hecho
+3. Mejorar el jugador 2 para que haga más cosas - Hecho (Ahora puede hacer lo mismo que el jugador)
+
+# Reparto:
+
+- Carlos: Testing
+- Alvaro: Música
+- Jonatan: Fotos, pantalla lucha
