@@ -151,7 +151,7 @@ def combate(request, combate_id):
                 jugador2.salud -= arma_jugador1.dano
                 mensaje = f"{jugador1.nombre} ataca a {jugador2.nombre}. ¡Le causa {arma_jugador1.dano} puntos de daño y recupera 10 de maná!"
             if chances():
-                mensaje_adicional = f"{jugador1.nombre} ha pillado desprevenido a´{jugador2.nombre}, ha logrado atacar otra vez!"
+                mensaje_adicional = f"{jugador1.nombre} ha pillado desprevenido a {jugador2.nombre}, ha logrado atacar otra vez!"
                 if chances():
                     critico = arma_jugador1.dano + arma_jugador1.critico
                     jugador2.salud -= critico
@@ -176,7 +176,7 @@ def combate(request, combate_id):
                         jugador1.save()
                         jugador2.save()
                     else:
-                        mensaje_mana = f"{jugador1.nombre} no tiene suficiente mana para realizar su ataque, pierde su turno canalizando energía"
+                        mensaje_mana = f"{jugador1.nombre} no tiene suficiente mana para realizar su ataque, pierde su turno canalizando energía."
                         jugador1.mana += 5
                 case "hb2":
                     if jugador1.mana >= 70:
@@ -188,57 +188,57 @@ def combate(request, combate_id):
                         rng = random.randint(0, 10)
                         if rng >= 7:
                             veneno = True
-                            mensaje_veneno = f"{jugador2.nombre} ha sido envenenado"
+                            mensaje_veneno = f"{jugador2.nombre} ha sido envenenado."
                     else:
-                        mensaje_mana = f"{jugador1.nombre} no tiene suficiente mana para realizar su ataque, pierde su turno canalizando energía"
+                        mensaje_mana = f"{jugador1.nombre} no tiene suficiente mana para realizar su ataque, pierde su turno canalizando energía."
                         jugador1.mana += 5
                 case "hb3":
                     if jugador1.mana >= 30:
-                        mensaje_accion = f"{jugador1.nombre} se prepara para recibir el ataque"
+                        mensaje_accion = f"{jugador1.nombre} se prepara para recibir el ataque."
                         guardia = True
                         jugador1.mana -= 30
                         jugador1.save()
                     else:
-                        mensaje_mana = f"{jugador1.nombre} no tiene suficiente mana para realizar su ataque, pierde su turno canalizando energía"
+                        mensaje_mana = f"{jugador1.nombre} no tiene suficiente mana para realizar su ataque, pierde su turno canalizando energía."
                         jugador1.mana += 5
 
                 case "hb4":
                     if jugador1.mana >= 100:
                         jugador1.mana -= 100
-                        mensaje_accion = f"{jugador1.nombre} canaliza su energía para realizar curar sus heridas"
+                        mensaje_accion = f"{jugador1.nombre} canaliza su energía para realizar curar sus heridas."
                         jugador1.salud += 300
                         jugador1.save()
                     else:
-                        mensaje_mana = f"{jugador1.nombre} no tiene suficiente mana para realizar su ataque, pierde su turno canalizando energía"
+                        mensaje_mana = f"{jugador1.nombre} no tiene suficiente mana para realizar su ataque, pierde su turno canalizando energía."
                         jugador1.mana += 5
 
         if veneno:
-            mensaje_veneno_2 = f"{jugador2.nombre} sufre daños de envenenamiento, pierde 100 puntos de vida"
+            mensaje_veneno_2 = f"{jugador2.nombre} sufre daños de envenenamiento, pierde 100 puntos de vida."
             jugador2.salud -= 100
             jugador2.save()
 
         if jugador2.salud <= 0:
-            derrota_j2 = f"{jugador2.nombre} ha sido derrotado, enhorabuena"
+            derrota_j2 = f"{jugador2.nombre} ha sido derrotado, enhorabuena."
             jugador2.salud = 200
             jugador2.save()
             return render(request, "app/resolucion.html", {"combate": combate_creado, "resolucion_2": derrota_j2})
 
         if not chances():
-            mensaje_j2 = f"{jugador2.nombre} se prepara para atacar"
+            mensaje_j2 = f"{jugador2.nombre} se prepara para atacar."
             if guardia:
-                mensaje_guardia = f"{jugador1.nombre} ha encajado el golpe, no sufre daños"
+                mensaje_guardia = f"{jugador1.nombre} ha encajado el golpe, no sufre daños."
             else:
-                mensaje_dano = f"{jugador1.nombre} ha recibido el golpe, sufre {arma_jugador2.dano} puntos de daño"
+                mensaje_dano = f"{jugador1.nombre} ha recibido el golpe, sufre {arma_jugador2.dano} puntos de daño."
                 jugador1.salud -= arma_jugador2.dano
                 jugador1.save()
         else:
-            mensaje_j2 = f"{jugador2.nombre} se prepara para lanzar un ataque especial"
+            mensaje_j2 = f"{jugador2.nombre} se prepara para lanzar un ataque especial."
 
             ataque_especial = randint(1,3)
 
             match ataque_especial:
                 case 1:
-                    mensaje_accion_j2 = f"{jugador2.nombre} ha lanza una onda de energía a {jugador1.nombre}"
+                    mensaje_accion_j2 = f"{jugador2.nombre} ha lanza una onda de energía a {jugador1.nombre}."
                     jugador1.salud -= 200
                     jugador1.save()
                 case 2:
@@ -247,14 +247,14 @@ def combate(request, combate_id):
                     rng = random.randint(0, 10)
                     if rng >= 7:
                         veneno_j2 = True
-                        mensaje_veneno_j2 = f"{jugador1.nombre} ha sido envenenado"
+                        mensaje_veneno_j2 = f"{jugador1.nombre} ha sido envenenado."
                 case 3:
-                    mensaje_accion_j2 = f"{jugador2.nombre} canaliza su energía para realizar curar sus heridas"
+                    mensaje_accion_j2 = f"{jugador2.nombre} canaliza su energía para realizar curar sus heridas, recupera 300 puntos de vida."
                     jugador2.salud += 300
                     jugador2.save()
 
             if veneno_j2:
-                mensaje_veneno_j2_2 = f"{jugador2.nombre} sufre daños de envenenamiento, pierde 100 puntos de vida"
+                mensaje_veneno_j2_2 = f"{jugador2.nombre} sufre daños de envenenamiento, pierde 100 puntos de vida."
                 jugador2.salud -= 100
                 jugador2.save()
 
@@ -265,6 +265,8 @@ def combate(request, combate_id):
             "jugador2": jugador2,
             "mensaje": mensaje,
             "mensaje_accion": mensaje_accion,
+            "mensaje_adicional": mensaje_adicional,
+            "mensaje_adicional_2": mensaje_adicional_2,
             "mensaje_veneno": mensaje_veneno,
             "mensaje_veneno_2": mensaje_veneno_2,
             "mensaje_guardia": mensaje_guardia,
