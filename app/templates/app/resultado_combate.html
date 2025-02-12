@@ -14,7 +14,13 @@
     <h4>Tus estadísticas:</h4>
     <p>Salud: {{ jugador1.salud }}</p>
     <p>Mana: {{ jugador1.mana }}</p>
-
+    {% load static %}
+    {% if jugador1.foto %}
+        <img src="{% static 'fotos_proyecto/' %}{{ jugador1.foto.name }}" alt="{{ jugador1.nombre }}" width="300" height="300">
+    {% endif %}
+    {% if jugador2.foto %}
+        <img src="{% static 'fotos_proyecto/' %}{{ jugador2.foto.name }}" alt="{{ jugador2.nombre }}" width="300" height="300" style="transform: scaleX(-1);">
+    {% endif %}
     <h3>Registro del combate</h3>
         <div class="Registro de combate ">
             <h4>Turno {{ combate.turnos }}:</h4>
