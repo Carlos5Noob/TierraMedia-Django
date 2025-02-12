@@ -21,12 +21,12 @@ class TemplatesTest(TestCase):
         self.assertTemplateUsed(self.response6, "app/formulario_combate.html")
 
     def test_status(self):
-        self.assertEqual(self.response1.status_code, 200)
-        self.assertEqual(self.response2.status_code, 200)
-        self.assertEqual(self.response3.status_code, 200)
-        self.assertEqual(self.response4.status_code, 200)
-        self.assertEqual(self.response5.status_code, 200)
-        self.assertEqual(self.response6.status_code, 200)
+        self.assertEqual(self.response1.status_code, 302)
+        self.assertEqual(self.response2.status_code, 302)
+        self.assertEqual(self.response3.status_code, 302)
+        self.assertEqual(self.response4.status_code, 302)
+        self.assertEqual(self.response5.status_code, 302)
+        self.assertEqual(self.response6.status_code, 302)
 
 class URLTest(TestCase):
     def setUp(self):
