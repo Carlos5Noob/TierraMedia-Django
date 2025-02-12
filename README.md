@@ -37,7 +37,6 @@ Aplicación web funcional donde los usuarios al autenticarse en el sistema puede
 13. Raids (2 jugadores vs 1 boss fuerte)
 14. Creador de personajes (Capar las stats para que no se empiece fuerte)
 15. Sistema de mejoras de salud y mana
-16. Fotos en los personajes
 17. Transformaciones o similares
 18. Pantalla de lucha dínamica que cambia según la foto de los jugadores
 19. Sistema de reputación
@@ -49,6 +48,8 @@ Aplicación web funcional donde los usuarios al autenticarse en el sistema puede
 1. Adicionales - Hecho
 2. Criticos - Hecho
 3. Mejorar el jugador 2 para que haga más cosas - Hecho (Ahora puede hacer lo mismo que el jugador)
+16. Fotos en los personajes
+
 
 # Reparto:
 
