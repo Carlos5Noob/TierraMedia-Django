@@ -55,3 +55,7 @@ Aplicación web funcional donde los usuarios al autenticarse en el sistema puede
 - Carlos: Testing
 - Alvaro: Música
 - Jonatan: Fotos, pantalla lucha
+
+# Requisitos
+
+- Instalar pillow: python -m pip install Pillow

@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import path, include
 from app import views
 
@@ -13,4 +15,4 @@ urlpatterns = [
     path('ubicaciones/<int:pk>/', views.DetailUbicacion.as_view(), name='ubicaciones_id'),
     path('combate/', views.pre_combate, name='lucha'),
     path("combate/<int:combate_id>/", views.combate, name="combate")
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
