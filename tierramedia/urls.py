@@ -19,6 +19,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('game/', include("app.urls")),
-    path('tierramedia/', include("django.contrib.auth.urls")),
+    path('game/', include("app.urls")), # el path donde se incluyen las urls de la aplicación
+    path('tierramedia/', include("django.contrib.auth.urls")), # el path donde se incluyen las urls de autenticación
 ]
