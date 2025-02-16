@@ -11,8 +11,11 @@ from .models import Personaje, Arma, Faccion, Ubicacion, Combate
 
 # Create your views here.
 
-
+# All views are based on classes (except combat views), to improve the reusability of the code and the scability of the project
 class HomeView(LoginRequiredMixin, TemplateView):
+    """
+    View for the index page
+    """
     template_name = "app/index.html"
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -20,6 +23,9 @@ class HomeView(LoginRequiredMixin, TemplateView):
         return context
 
 class ListCharacters(LoginRequiredMixin, ListView):
+    """
+    View for the list of characters
+    """
     model = Personaje
     template_name = "app/lista_personajes.html"
     context_object_name = "personajes"
@@ -28,6 +34,9 @@ class ListCharacters(LoginRequiredMixin, ListView):
         return Personaje.objects.all()
 
 class ListWeapons(LoginRequiredMixin, ListView):
+    """
+    View for the list of weapons
+    """
     model = Arma
     template_name = "app/lista_armas.html"
     context_object_name = "armas"
@@ -36,6 +45,9 @@ class ListWeapons(LoginRequiredMixin, ListView):
         return Arma.objects.all()
 
 class ListFactions(LoginRequiredMixin, ListView):
+    """
+    View for the list of factions
+    """
     model = Faccion
     template_name = "app/lista_facciones.html"
     context_object_name = "facciones"
@@ -44,6 +56,9 @@ class ListFactions(LoginRequiredMixin, ListView):
         return Faccion.objects.all()
 
 class Ubicaciones(LoginRequiredMixin, ListView):
+    """
+    View for the list of locations
+    """
     model = Ubicacion
     template_name = "app/lista_ubicaciones.html"
     context_object_name = "ubicaciones"
@@ -52,25 +67,43 @@ class Ubicaciones(LoginRequiredMixin, ListView):
         return Ubicacion.objects.all()
 
 class DetailCharacters(LoginRequiredMixin, DetailView):
+    """
+    View for the details of a character
+    This class catches the id of the character and send it to the template
+    """
     model = Personaje
     template_name = "app/detalles-personaje.html"
     context_object_name = "personaje"
 
 class DetailArma(LoginRequiredMixin, DetailView):
+    """
+    View for the details of a weapon
+    This class catches the id of the weapon and send it to the template
+    """
     model = Arma
     template_name = "app/detalles-arma.html"
     context_object_name = "arma"
 
 class DetailFaccion(LoginRequiredMixin, DetailView):
+    """
+    View for the details of a faction
+    This class catches the id of the faction and send it to the template
+    """
     model = Faccion
     template_name = "app/detalles-faccion.html"
     context_object_name = "faccion"
 
 class DetailUbicacion(LoginRequiredMixin, DetailView):
+    """
+    View for the details of a location
+    This class catches the id of the location and send it to the template
+    """
     model = Ubicacion
     template_name = "app/detalles-ubicacion.html"
     context_object_name = "ubicacion"
 
+
+# Views for the combat, bassed on functions
 @login_required()
 def pre_combate(request):
     """
@@ -110,6 +143,9 @@ def pre_combate(request):
 
 @login_required
 def combate(request, combate_id):
+    """
+    Aqui recogemos todos los requisitos que se necesitan para efectuar un combate
+    """
     combate_creado = get_object_or_404(Combate, id=combate_id)
     jugador1 = combate_creado.luchador_1
     arma_jugador1 = Arma.objects.get(id=jugador1.arma_id)
@@ -288,6 +324,9 @@ def combate(request, combate_id):
     })
 
 def chances():
+    """
+    Function to calculate the chances that the player 2 will perform an attack special
+    """
     rng = randint(1, 10)
     if rng == 1:
         return True

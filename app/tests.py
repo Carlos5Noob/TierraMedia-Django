@@ -7,6 +7,9 @@ from app.models import Personaje, Arma, Faccion, Ubicacion
 # Create your tests here.
 
 class TemplatesTest(TestCase):
+    """
+    Tests for status code of templates
+    """
     def setUp(self):
         self.response1 = self.client.get(reverse("index"))
         self.response2 = self.client.get(reverse("personajes"))
@@ -32,6 +35,9 @@ class TemplatesTest(TestCase):
         self.assertEqual(self.response6.status_code, 302)
 
 class URLTest(TestCase):
+    """
+    Tests for urls
+    """
     def setUp(self):
         pass
     def test_urls(self):
@@ -43,6 +49,9 @@ class URLTest(TestCase):
         self.assertURLEqual("/game/combate/", reverse("lucha"))
 
 class ModelsTest(TestCase):
+    """
+    Tests for models. Check if the models are created well. Also check if the str method works
+    """
     def setUp(self):
         self.arma = Arma.objects.create(
             nombre = "Espadon",
