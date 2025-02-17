@@ -24,9 +24,17 @@
 
 
    {% if personajes %}
-
-
-
+        <div class="container bg-secondary p-3 mt-5 rounded">
+           <h3 class="text-light container">Listar por facción:</h3>
+           <form method="GET">
+                <select class="form-select container" name="faccion" id="listar" onchange="this.form.submit()">
+                <option value="" {% if not request.GET.faccion %}selected{% endif %}>Listar todos</option>
+                {% for faccion in facciones %}
+                    <option value="{{ faccion.id }}" {% if request.GET.faccion == faccion.id|stringformat:"s" %}selected{% endif %}>{{ faccion }}</option>
+                {% endfor %}
+                </select>
+            </form>
+       </div>
 
        <ul style="color: white" class="col-3">
 
@@ -49,6 +57,9 @@
 
        </ul>
 
+    {% else %}
+
+       <h2>No hay personajes disponibles</h2>
 
    {% endif %}
 

@@ -4,6 +4,7 @@ from random import randint
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404, redirect
+from django.template.context_processors import request
 
 from django.views.generic import TemplateView, ListView, DetailView
 from .models import Personaje, Arma, Faccion, Ubicacion, Combate
@@ -24,14 +25,24 @@ class HomeView(LoginRequiredMixin, TemplateView):
 
 class ListCharacters(LoginRequiredMixin, ListView):
     """
-    View for the list of characters
+    View for the list of characters.
+    There is a button to filter characters per factions
     """
     model = Personaje
     template_name = "app/lista_personajes.html"
     context_object_name = "personajes"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["facciones"] = Faccion.objects.all()
+        return context
+
     def get_queryset(self):
+        faccion_id = self.request.GET.get("faccion")
+        if faccion_id and faccion_id.isdigit():
+            return Personaje.objects.filter(faccion_id=faccion_id)
         return Personaje.objects.all()
+
 
 class ListWeapons(LoginRequiredMixin, ListView):
     """
