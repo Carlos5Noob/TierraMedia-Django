@@ -1,0 +1,111 @@
+h1, h2 {
+    text-align: center;
+}
+
+h1 {
+    font-family: "InglesAntiguo", Serif;
+    font-size: 60px;
+    font-weight: bold;
+    color: gold;
+    text-shadow: 4px 4px 10px black;
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-family: "InglesAntiguo", Serif;
+    font-size: 40px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 3px 3px 8px red;
+    margin-bottom: 20px;
+}
+
+.combat-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 50px;
+    margin-bottom: 20px;
+}
+
+.fighter {
+    text-align: center;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.fighter img {
+    width: 300px;
+    height: 300px;
+    border: 3px solid #000;
+    border-radius: 10px;
+}
+
+.versus {
+    font-size: 50px;
+    font-weight: bold;
+    color: red;
+    align-self: center;
+}
+
+.stats {
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    display: inline-block;
+    margin-top: 10px;
+    text-align: center;
+    width: 80%;
+}
+
+.combat-log {
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 20px;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.combat-log h3 {
+    color: yellow;
+}
+
+.combat-log p {
+    margin: 5px 0;
+    color: lightgrey;
+}
+
+.combat-form {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.combat-form button {
+    background: red;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.combat-form button:hover {
+    background: darkred;
+}
+
+#habilidades {
+    margin-top: 10px;
+}
+
+#habilidades button {
+    background: darkorange;
+}

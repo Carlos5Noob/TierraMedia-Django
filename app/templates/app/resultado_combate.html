@@ -1,96 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <title>A pelear!!!</title>
+    <link rel="stylesheet" href="{% static 'css/resultado_combate.css' %}">
+    <style>
+        @font-face {
+            font-family: "InglesAntiguo";
+            src: url("{% static 'fonts/OldLondon.ttf' %}") ;
+        }
+    body {
+        background-image: url('{% static "fondo-animado-magma.gif" %}');
+        background-size: 100% 100%; /* Asegura que el fondo cubra toda la pantalla */
+        background-repeat: no-repeat;
+        background-attachment: fixed; /* Hace que el fondo se quede fijo al hacer scroll */
+        background-color: black;
+        margin: 0;
+        height: 100vh; /* Asegura que el body ocupe toda la altura de la ventana */
+    }
+
+    </style>
 </head>
 <body>
 
     <h1>{{ combate.nombre }}</h1>
-
     <h2>Combate entre {{ jugador1.nombre }} y {{ jugador2.nombre }}</h2>
-    <p><strong>{{ jugador2.nombre }} - Vida:</strong> {{ jugador2.salud }}</p>
 
-    <h4>Tus estadísticas:</h4>
-    <p>Salud: {{ jugador1.salud }}</p>
-    <p>Mana: {{ jugador1.mana }}</p>
-    {% load static %}
-    {% if jugador1.foto %}
-        <img src="{% static 'fotos_proyecto/' %}{{ jugador1.foto.name }}" alt="{{ jugador1.nombre }}" width="300" height="300">
-    {% endif %}
-    {% if jugador2.foto %}
-        <img src="{% static 'fotos_proyecto/' %}{{ jugador2.foto.name }}" alt="{{ jugador2.nombre }}" width="300" height="300" style="transform: scaleX(-1);">
-    {% endif %}
-    <h3>Registro del combate</h3>
-        <div class="Registro de combate ">
-            <h4>Turno {{ combate.turnos }}:</h4>
-            {% if mensaje %}
-            	<p>{{ mensaje }}</p>
+    <div class="combat-container">
+        <div class="fighter">
+            {% if jugador1.foto %}
+                <img src="{% static 'fotos_proyecto/' %}{{ jugador1.foto.name }}" alt="{{ jugador1.nombre }}">
             {% endif %}
-            {% if mensaje_accion %}
-            	<p>{{ mensaje_accion }}</p>
-            {% endif %}
-            {% if mensaje_adicional %}
-                <p>{{ mensaje_adicional }}</p>
-            {% endif %}
-            {% if mensaje_adicional_2 %}
-            	<p>{{ mensaje_adicional_2 }}</p>
-            {% endif %}
-            {% if mensaje_mana %}
-                <p>{{ mensaje_mana }}</p>
-            {% endif %}
-            {% if mensaje_veneno %}
-            	<p>{{ mensaje_veneno }}</p>
-            {% endif %}
-            {% if mensaje_veneno_2 %}
-                <p>{{ mensaje_veneno_2 }}</p>
-            {% endif %}
-            {% if mensaje_j2  %}
-            	<p>{{ mensaje_j2  }}</p>
-            {% endif %}
-            {% if mensaje_accion_j2 %}
-                <p>{{ mensaje_accion_j2 }}</p>
-            {% endif %}
-            {% if mensaje_veneno_j2 %}
-                <p>{{ mensaje_veneno_j2 }}</p>	
-            {% endif %} 
-            {% if mensaje_veneno_j2_2 %}
-                <p>{{ mensaje_veneno_j2_2 }}</p>	
-            {% endif %} 
-            {% if mensaje_guardia %}
-                <p>{{ mensaje_guardia }}</p>
-            {% endif %}
-            {% if mensaje_dano %}
-            	<p>{{ mensaje_dano }}</p>
-            {% endif %}
+            <div class="stats">
+                <p><strong>{{ jugador1.nombre }}</strong></p>
+                <p>Salud: {{ jugador1.salud }}</p>
+                <p>Mana: {{ jugador1.mana }}</p>
+            </div>
         </div>
-
-    <form method="POST">
-        {% csrf_token %}
-        <button type="submit" name="accion" value="atacar">Atacar</button>
-        <button type="button" onclick="mostrar_habilidades()">Habilidades</button>
-        <button type="button" onclick="retirada()">Retirada</button>
-
-        <div id="habilidades" itemid="oculto" style="display: none">
-            <button type="submit" name="accion" value="hb1">Onda de energía : 50</button>
-            <button type="submit" name="accion" value="hb2">Veneno Oculto : 70</button>
-            <button type="submit" name="accion" value="hb3">Guardia : 30</button>
-            <button type="submit" name="accion" value="hb4">Curación : 100</button>
+        <div class="versus">VS</div>
+        <div class="fighter">
+            {% if jugador2.foto %}
+                <img style= "transform: scaleX(-1)" src="{% static 'fotos_proyecto/' %}{{ jugador2.foto.name }}" alt="{{ jugador2.nombre }}">
+            {% endif %}
+            <div class="stats">
+                <p><strong>{{ jugador2.nombre }}</strong></p>
+                <p>Salud: {{ jugador2.salud }}</p>
+            </div>
         </div>
-    </form>
+    </div>
+
+
+    <div class="combat-log">
+        <h3>Registro del combate</h3>
+        <h4>Turno {{ combate.turnos }}:</h4>
+        {% if mensaje %}<p>{{ mensaje }}</p>{% endif %}
+        {% if mensaje_accion %}<p>{{ mensaje_accion }}</p>{% endif %}
+        {% if mensaje_adicional %}<p>{{ mensaje_adicional }}</p>{% endif %}
+        {% if mensaje_adicional_2 %}<p>{{ mensaje_adicional_2 }}</p>{% endif %}
+        {% if mensaje_mana %}<p>{{ mensaje_mana }}</p>{% endif %}
+        {% if mensaje_veneno %}<p>{{ mensaje_veneno }}</p>{% endif %}
+        {% if mensaje_veneno_2 %}<p>{{ mensaje_veneno_2 }}</p>{% endif %}
+        {% if mensaje_j2 %}<p>{{ mensaje_j2 }}</p>{% endif %}
+        {% if mensaje_accion_j2 %}<p>{{ mensaje_accion_j2 }}</p>{% endif %}
+        {% if mensaje_veneno_j2 %}<p>{{ mensaje_veneno_j2 }}</p>{% endif %}
+        {% if mensaje_veneno_j2_2 %}<p>{{ mensaje_veneno_j2_2 }}</p>{% endif %}
+        {% if mensaje_guardia %}<p>{{ mensaje_guardia }}</p>{% endif %}
+        {% if mensaje_dano %}<p>{{ mensaje_dano }}</p>{% endif %}
+    </div>
+
+    <div class="combat-form">
+        <form method="POST">
+            {% csrf_token %}
+            <button type="submit" name="accion" value="atacar">Atacar</button>
+            <button type="button" onclick="mostrar_habilidades()">Habilidades</button>
+            <button type="button" onclick="retirada()">Retirada</button>
+
+            <div id="habilidades" style="display: none">
+                <button type="submit" name="accion" value="hb1">Onda de energía : 50</button>
+                <button type="submit" name="accion" value="hb2">Veneno Oculto : 70</button>
+                <button type="submit" name="accion" value="hb3">Guardia : 30</button>
+                <button type="submit" name="accion" value="hb4">Curación : 100</button>
+            </div>
+        </form>
+    </div>
 
     <script>
         function retirada() {
-            alert("Huir es de corbades, no tienes escapatoria")
+            alert("Huir es de cobardes, no tienes escapatoria");
         }
 
         function mostrar_habilidades(){
-           let div = document.getElementById("habilidades")
-            if(div.style.display === "none"){
-                div.style.display = "block";
-            }else{
-                div.style.display = "none";
-            }
+           let div = document.getElementById("habilidades");
+            div.style.display = div.style.display === "none" ? "block" : "none";
         }
     </script>
 </body>
