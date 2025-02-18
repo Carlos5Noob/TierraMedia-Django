@@ -1,6 +1,6 @@
 import random
 import urllib.parse
-from audioop import reverse
+# from audioop import reverse
 from random import randint
 
 from django.contrib.auth.decorators import login_required
