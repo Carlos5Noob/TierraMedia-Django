@@ -19,4 +19,5 @@ urlpatterns = [
     path("combate/<int:combate_id>/", views.combate, name="combate"),
     path("taberna/", views.taberna, name='taberna'),
     path('taberna/hablar/', views.hablar_npc, name='hablar_npc'),
+    path('taberna/dados/', views.dados, name='dados'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

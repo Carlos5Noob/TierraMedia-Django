@@ -1,6 +1,6 @@
 import random
 import urllib.parse
-# from audioop import reverse
+from django.urls import reverse
 from random import randint
 
 from django.contrib.auth.decorators import login_required
@@ -380,4 +380,26 @@ def hablar_npc(request):
     # esto lo hago para codificar el mensaje
     mensaje_codificado = urllib.parse.quote(mensaje)
 
-    return redirect(f'/game/taberna/?mensaje={mensaje_codificado}')
+    return redirect(reverse('taberna') + f'?mensaje={mensaje_codificado}')
+
+def dados(request):
+    resultado = None
+    dado_jugador = None
+    dado_tabernero = None
+
+    if request.method == "POST":
+        dado_jugador = random.randint(1, 6)
+        dado_tabernero = random.randint(1, 6)
+
+        if dado_jugador > dado_tabernero:
+            resultado = "¡Ganaste! 🍻"
+        elif dado_jugador < dado_tabernero:
+            resultado = "El tabernero gana. ¡Suerte la próxima vez! 😆"
+        else:
+            resultado = "Empate. ¡Lanza otra vez! 🎲"
+
+    return render(request, "app/dados.html", {
+        "dado_jugador": dado_jugador,
+        "dado_tabernero": dado_tabernero,
+        "resultado": resultado
+    })
