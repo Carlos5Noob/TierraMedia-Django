@@ -1,8 +1,11 @@
 import random
+import urllib.parse
+from audioop import reverse
 from random import randint
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template.context_processors import request
 
@@ -112,7 +115,6 @@ class DetailUbicacion(LoginRequiredMixin, DetailView):
     model = Ubicacion
     template_name = "app/detalles-ubicacion.html"
     context_object_name = "ubicacion"
-
 
 # Views for the combat, bassed on functions
 @login_required()
@@ -343,3 +345,39 @@ def chances():
         return True
     else:
         return False
+
+# function to control the feature of the taberna
+@login_required()
+def taberna(request):
+    """
+    View for the taberna page, where characters can rest of accept missions, etc
+    """
+    mensaje = request.GET.get('mensaje')
+    if request.method == "POST":
+        personajes = Personaje.objects.all()
+        for personaje in personajes:
+            personaje.salud = 300
+            personaje.save()
+        return render(request, "app/taberna.html", context={"descanso": "Todos los personajes se han restaurado correctamente"})
+    return render(request, "app/taberna.html", context={"mensaje": mensaje})
+
+def hablar_npc(request):
+    frases = [
+        "Escuché que hay un tesoro escondido en el bosque...",
+        "Dicen que un dragón fue visto cerca de la montaña.",
+        "Ten cuidado con los bandidos del camino del sur.",
+        "Las mejores armas se venden en la ciudad capital.",
+        "Escuché que en el bosque al norte hay un guerrero maldito… nadie que lo ha visto ha vuelto para contarlo.",
+        "Dicen que un dragón fue visto cerca de la montaña. ¿Será verdad o solo habladurías?",
+        "Las ruinas antiguas de los elfos esconden un poder que muchos desean… pero pocos sobreviven para obtenerlo.",
+        "Hay un pasadizo secreto en las alcantarillas de la ciudad. Solo los ladrones lo conocen.",
+        "Un viajero me dijo que en el pueblo vecino hay alguien que paga bien por hierbas raras.",
+        "Ten cuidado con los bandidos del camino del sur, no respetan ni a los mercaderes ni a los aventureros.",
+        "Hace años, un mago loco selló un demonio en la cueva al este. Pero las puertas han empezado a crujir…"
+    ]
+    mensaje = random.choice(frases)
+
+    # esto lo hago para codificar el mensaje
+    mensaje_codificado = urllib.parse.quote(mensaje)
+
+    return redirect(f'/game/taberna/?mensaje={mensaje_codificado}')
