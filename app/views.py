@@ -238,7 +238,7 @@ def combate(request, combate_id):
 
             match ataque_especial:
                 case 1:
-                    mensaje_accion_j2 = f"{jugador2.nombre} ha lanza una onda de energía a {jugador1.nombre}."
+                    mensaje_accion_j2 = f"{jugador2.nombre} ha lanza una onda de energía a {jugador1.nombre} causandole 200 puntos de daño."
                     jugador1.salud -= 200
                     jugador1.save()
                 case 2:
