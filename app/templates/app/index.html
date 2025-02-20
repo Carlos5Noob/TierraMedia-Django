@@ -31,7 +31,7 @@
        {% csrf_token %}
        <button type='submit' class='btn btn-light'>Logout</button>
    </form>
-    <audio id="reproductor" hidden="hidden" controls></audio>
+    <audio id="reproductor"  controls></audio>
     <button onclick="CancionRandom()">Reproducir Canción Aleatoria</button>
 </header>
 
@@ -85,9 +85,8 @@
     <script>
 
         const songs = [
-            "../../static/music/Firelink%Shrine.mp3"
-            , "../../static/music/Daima_Goku.mp3"
-            ,
+            "../../static/music/Firelink%20Shrine.mp3",
+            "../../static/music/Daima_Goku.mp3",
         ];
 
         function CancionRandom() {

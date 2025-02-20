@@ -23,6 +23,8 @@
     </style>
 </head>
 <body>
+    <audio id="reproductor2"  controls></audio>
+    <button onclick="CancionRandom()">Reproducir Canción Aleatoria</button>
 
     <h1>{{ combate.nombre }}</h1>
     <h2>Combate entre {{ jugador1.nombre }} y {{ jugador2.nombre }}</h2>
@@ -94,6 +96,26 @@
            let div = document.getElementById("habilidades");
             div.style.display = div.style.display === "none" ? "block" : "none";
         }
+
+
+
+        function CancionRandom() {
+
+            const songs = [
+                "../../static/music/Broly_ActiveSkill.mp3",
+                "../../static/music/Broly_Revival.mp3",
+                "../../static/music/Gogeta_AS.mp3",
+                "../../static/music/Goku_SSJ.mp3",
+                "../../static/music/Goku_SSJ3.mp3",
+                "../../static/music/Undyne_Theme.mp3",
+            ];
+
+            const random = Math.floor(Math.random() * songs.length);
+            const reproductor = document.getElementById("reproductor2");
+            reproductor.src = songs[random];
+            reproductor.play();
+        }
+
     </script>
 </body>
 </html>
