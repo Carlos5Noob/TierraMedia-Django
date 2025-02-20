@@ -23,8 +23,9 @@
     </style>
 </head>
 <body>
-    <audio id="reproductor2"  controls></audio>
+    <audio id="reproductor2" controls autoplay hidden="hidden"></audio>
     <button onclick="CancionRandom()">Reproducir Canción Aleatoria</button>
+    <button onclick="control_reproductor()" id="btn_control">Detener música</button>
 
     <h1>{{ combate.nombre }}</h1>
     <h2>Combate entre {{ jugador1.nombre }} y {{ jugador2.nombre }}</h2>
@@ -100,22 +101,35 @@
 
 
         function CancionRandom() {
+        let songs = [
+            "{% static 'music/Broly_ActiveSkill.mp3' %}",
+            "{% static 'music/Broly_Revival.mp3' %}",
+            "{% static 'music/Gogeta_AS.mp3' %}",
+            "{% static 'music/Goku_SSJ.mp3' %}",
+            "{% static 'music/Goku_SSJ3.mp3' %}",
+            "{% static 'music/Undyne_Theme.mp3' %}"
+        ];
 
-            const songs = [
-                "../../static/music/Broly_ActiveSkill.mp3",
-                "../../static/music/Broly_Revival.mp3",
-                "../../static/music/Gogeta_AS.mp3",
-                "../../static/music/Goku_SSJ.mp3",
-                "../../static/music/Goku_SSJ3.mp3",
-                "../../static/music/Undyne_Theme.mp3",
-            ];
+        let random = Math.floor(Math.random() * songs.length);
+        let reproductor = document.getElementById("reproductor2");
+        reproductor.src = songs[random];
+        reproductor.play();
+    }
 
-            const random = Math.floor(Math.random() * songs.length);
-            const reproductor = document.getElementById("reproductor2");
-            reproductor.src = songs[random];
+    function control_reproductor(){
+
+        let reproductor = document.getElementById("reproductor2");
+        let boton = document.getElementById("btn_control"); 
+    
+        if (!reproductor.paused) { 
+            reproductor.pause();
+            boton.textContent = "Reanudar música";
+        } else {
             reproductor.play();
+            boton.textContent = "Detener música";
         }
 
+    }
     </script>
 </body>
 </html>
