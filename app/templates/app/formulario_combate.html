@@ -4,41 +4,50 @@
     {% load static %}
     <meta charset="UTF-8">
     <title>Formulario de combate</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        body {
+            background-image: url('{% static "fondo-combate.jpg" %}');
+        }
+    </style>
 </head>
 <body>
-    <h1>Formulario de combate</h1>
+    <div class="text-bg-danger p-4 container mt-5 rounded shadow-lg">
+        <h1>Formulario de combate</h1>
 
-    <ul>
-        {% if mensaje_error %}
-    	    <li style="color: red;">{{ mensaje_error }}</li>
-        {% endif %}
+        <ul>
+            {% if mensaje_error %}
+                <li style="color: red;">{{ mensaje_error }}</li>
+            {% endif %}
 
-    </ul>
+        </ul>
 
-    <h3>Seleccione sus combatientes</h3>
+        <h3>Seleccione sus combatientes</h3>
 
-    <form method="post" action="{% url 'lucha' %}">
-        {% csrf_token %}
-        <label for="nombre_combate">Proporcione un nombre a esta épica batalla: </label>
-        <input type="text"  name="nombre_combate" id="nombre_combate" required>
-        <br><br>
-        <label for="jugador1">Jugador 1:
-            <select name="jugador1" id="jugador1">
-                {% for personaje in personajes %}
-                    <option value="{{ personaje.id }}">{{ personaje.nombre }}</option>
-                {% endfor %}
-            </select>
-        </label>
-        <br><br>
-        <label for="jugador2">Jugador 2:
-            <select name="jugador2" id="jugador2">
-                {% for personaje in personajes %}
-                    <option value="{{ personaje.id }}">{{ personaje.nombre }}</option>
-                {% endfor %}
-            </select>
-        </label>
-        <br><br>
-        <button type="submit">Empezar combate</button>
-    </form>
+        <form method="post" action="{% url 'lucha' %}">
+            {% csrf_token %}
+            <label for="nombre_combate">Proporcione un nombre a esta épica batalla: </label>
+            <input type="text"  name="nombre_combate" id="nombre_combate" required>
+            <br><br>
+            <label for="jugador1">Jugador 1:
+                <select name="jugador1" id="jugador1">
+                    {% for personaje in personajes %}
+                        <option value="{{ personaje.id }}">{{ personaje.nombre }}</option>
+                    {% endfor %}
+                </select>
+            </label>
+            <br><br>
+            <label for="jugador2">Jugador 2:
+                <select name="jugador2" id="jugador2">
+                    {% for personaje in personajes %}
+                        <option value="{{ personaje.id }}">{{ personaje.nombre }}</option>
+                    {% endfor %}
+                </select>
+            </label>
+            <br><br>
+            <button type="submit">Empezar combate</button>
+        </form>
+    </div>
 </body>
 </html>
