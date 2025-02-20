@@ -20,4 +20,5 @@ urlpatterns = [
     path("taberna/", views.taberna, name='taberna'),
     path('taberna/hablar/', views.hablar_npc, name='hablar_npc'),
     path('taberna/dados/', views.dados, name='dados'),
+    path('crear_personaje/', views.crear_personaje, name='crear_personaje'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

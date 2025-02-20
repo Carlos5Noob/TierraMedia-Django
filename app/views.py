@@ -403,3 +403,37 @@ def dados(request):
         "dado_tabernero": dado_tabernero,
         "resultado": resultado
     })
+
+def crear_personaje(request):
+
+    armas = Arma.objects.all()
+    facciones = Faccion.objects.all()
+    ubicaciones = Ubicacion.objects.all()
+
+    if request.method == "POST":
+        nombre = request.POST.get("nombre")
+        salud = request.POST.get("salud")
+        mana = request.POST.get("mana")
+        arma = request.POST.get("arma")
+        faccion = request.POST.get("faccion")
+        ubicacion = request.POST.get("ubicacion")
+        foto = request.FILES.get("foto")
+        personaje = Personaje.objects.create(
+            nombre = nombre,
+            salud = salud,
+            mana = mana,
+            arma_id = arma,
+            faccion_id = faccion,
+            ubicacion_id = ubicacion, 
+            foto = foto
+        )
+
+        personaje.save()
+
+        return render(request, "app/crear_personaje.html", {"mensaje": "Personaje creado correctamente"})
+
+    return render(request, "app/crear_personaje.html", {
+        "armas": armas,
+        "facciones": facciones,
+        "ubicaciones": ubicaciones
+    })
