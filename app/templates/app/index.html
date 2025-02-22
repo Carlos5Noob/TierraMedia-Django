@@ -85,105 +85,98 @@
 </head>
 <body style='background-image: url("../../static/Inn.jpg"); background-repeat: no-repeat; background-size: cover;'>
 
-<header style="background-color: #1D1D1D; position:relative" class="d-flex flex-wrap align-items-center justify-content-start">
-   <a href="{% url 'index' %}"><img src='{% static 'resources/logo-tierra-media.png' %}' alt='home' id="imagen"></a>
-   <form action="{% url 'logout' %}" method='POST'>
-       {% csrf_token %}
-       <button type='submit' class='btn btn-light' id="logout">Logout</button>
-   </form>
-    <audio id="reproductor2" hidden="hidden" controls autoplay></audio>
-    <button onclick="CancionRandom()" class="custom-btn mx-3">Reproducir Canción Aleatoria</button>
-    <button onclick="control_reproductor()" class="custom-btn mx-3" id="btn_control" style="display: none">Detener música</button>
-
-</header>
+    <header style="background-color: #1D1D1D; position:relative" class="d-flex flex-wrap align-items-center justify-content-start">
+        <a href="{% url 'index' %}">
+            <img src='{% static 'resources/logo-tierra-media.png' %}' alt='home' id="imagen">
+        </a>
+        <form action="{% url 'logout' %}" method='POST'>
+            {% csrf_token %}
+            <button type='submit' class='btn btn-light' id="logout">Logout</button>
+        </form>
+        <audio id="reproductor" hidden="hidden" controls autoplay></audio>
+        <button onclick="CancionRandom()" class="custom-btn mx-3">Reproducir Canción Aleatoria</button>
+        <button onclick="control_reproductor()" class="custom-btn mx-3" id="btn_control" style="display: none">Detener música</button>
+    </header>
 
     <div class="container-fluid p-5 my-5" style="text-align: center">
         <h1>¡Bienvenido, {{ usuario | capfirst | cambiar_color:"darkgoldenrod" | safe}}!</h1>
         <br>
-            <div>
-                <a href="{% url 'personajes' %}">
-                    <button type="button" class="btn btn-outline-light bg-dark btn-lg" id="menu">Lista de Personajes</button>
-                </a>
-            </div>
+        <div>
+            <a href="{% url 'personajes' %}">
+                <button type="button" class="btn btn-outline-light bg-dark btn-lg" id="menu">Lista de Personajes</button>
+            </a>
+        </div>
         <br>
-            <div>
-                <a href="{% url 'armas' %}">
-                    <button type="button" class="btn btn-outline-light bg-dark btn-lg" id="menu">Lista de Armas</button>
-                </a>
-            </div>
+        <div>
+            <a href="{% url 'armas' %}">
+                <button type="button" class="btn btn-outline-light bg-dark btn-lg" id="menu">Lista de Armas</button>
+            </a>
+        </div>
         <br>
-            <div>
-                <a href="{% url 'facciones' %}">
-                    <button type="button" class="btn btn-outline-light bg-dark btn-lg" id="menu">Lista de facciones</button>
-                </a>
-            </div>
+        <div>
+            <a href="{% url 'facciones' %}">
+                <button type="button" class="btn btn-outline-light bg-dark btn-lg" id="menu">Lista de facciones</button>
+            </a>
+        </div>
         <br>
-            <div>
-                <a href="{% url 'ubicaciones' %}">
-                    <button type="button" class="btn btn-outline-light bg-dark btn-lg" id="menu">Lista de ubicaciones</button>
-                </a>
-            </div>
+        <div>
+            <a href="{% url 'ubicaciones' %}">
+                <button type="button" class="btn btn-outline-light bg-dark btn-lg" id="menu">Lista de ubicaciones</button>
+            </a>
+        </div>
         <br>
-            <div>
-                <a href="{% url 'lucha' %}">
-                    <button type="button" class="btn btn-outline-light bg-dark btn-lg" id="menu">¡Combate!</button>
-                </a>
-            </div>
+        <div>
+            <a href="{% url 'lucha' %}">
+                <button type="button" class="btn btn-outline-light bg-dark btn-lg" id="menu">¡Combate!</button>
+            </a>
+        </div>
         <br>
-            <div>
-                <a href="{% url 'taberna' %}">
-                    <button type="button" class="btn btn-outline-light bg-dark btn-lg" id="menu">Taberna</button>
-                </a>
-            </div>
+        <div>
+            <a href="{% url 'taberna' %}">
+                <button type="button" class="btn btn-outline-light bg-dark btn-lg" id="menu">Taberna</button>
+            </a>
+        </div>
         <br>
-            <div>
-                <a href="{% url 'crear_personaje' %}">
-                    <button type="button" class="btn btn-outline-light bg-dark btn-lg" id="menu">Crear Personaje</button>
-                </a>
-            </div>
+        <div>
+            <a href="{% url 'crear_personaje' %}">
+                <button type="button" class="btn btn-outline-light bg-dark btn-lg" id="menu">Crear Personaje</button>
+            </a>
+        </div>
     </div>
 
-
     <script>
-
         function CancionRandom() {
             let songs = [
                 "{% static 'music/Firelink%20Shrine.mp3' %}",
-                "{% static 'music/Daima_Goku.mp3' %}",
+                "{% static 'music/Daima_Goku.mp3' %}"
             ];
 
             let boton = document.getElementById("btn_control");
             let random = Math.floor(Math.random() * songs.length);
-            let reproductor = document.getElementById("reproductor2");
+            let reproductor = document.getElementById("reproductor");
             reproductor.src = songs[random];
             reproductor.play();
 
-
-            if (boton.style.display === "none"){
-                boton.style.display = "block"
+            if (boton.style.display === "none") {
+                boton.style.display = "block";
             }
-            if (boton.textContent === "Reanudar música"){
+            if (boton.textContent === "Reanudar música") {
                 boton.textContent = "Detener música";
             }
-
-
-    }
-
-    function control_reproductor(){
-
-        let reproductor = document.getElementById("reproductor2");
-        let boton = document.getElementById("btn_control");
-
-        if (!reproductor.paused) {
-            reproductor.pause();
-            boton.textContent = "Reanudar música";
-        } else {
-            reproductor.play();
-            boton.textContent = "Detener música";
         }
 
-    }
-    </script>
+        function control_reproductor() {
+            let reproductor = document.getElementById("reproductor");
+            let boton = document.getElementById("btn_control");
 
+            if (!reproductor.paused) {
+                reproductor.pause();
+                boton.textContent = "Reanudar música";
+            } else {
+                reproductor.play();
+                boton.textContent = "Detener música";
+            }
+        }
+    </script>
 </body>
 </html>
