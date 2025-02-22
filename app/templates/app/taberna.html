@@ -85,7 +85,7 @@
                     {% csrf_token %}
                     <button class="btn btn-info" id="botones">Hablar con el tabernero</button>
                 </form>
-                <img src="../../static/resources/tabernero.webp" alt="tabernero" class="mt-3">
+                <img src="{% static 'resources/tabernero.webp' %}" alt="tabernero" class="mt-3">
                 <div class="message-box">
                     {% if mensaje %}
                         <p class="h4">{{ mensaje }}</p>
