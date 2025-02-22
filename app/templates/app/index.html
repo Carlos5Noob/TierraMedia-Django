@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load static %}
 <head>
     <meta charset="UTF-8">
     <title>Inicio</title>
@@ -31,8 +32,9 @@
        {% csrf_token %}
        <button type='submit' class='btn btn-light'>Logout</button>
    </form>
-    <audio id="reproductor"  controls></audio>
+    <audio id="reproductor2" hidden="hidden" controls autoplay></audio>
     <button onclick="CancionRandom()">Reproducir Canción Aleatoria</button>
+    <button onclick="control_reproductor()" id="btn_control" style="display: none">Detener música</button>
 </header>
 
     <div class="container-fluid p-5 my-5" style="text-align: center">
@@ -82,7 +84,7 @@
     <br>
         <div>
             <a href="{% url 'crear_personaje' %}">
-                <button type="button" class="btn btn-outline-light">Crear Personaje</button">
+                <button type="button" class="btn btn-outline-light">Crear Personaje</button>
             </a>
         </div>
     </div>
@@ -90,17 +92,43 @@
 
     <script>
 
-        const songs = [
-            "../../static/music/Firelink%20Shrine.mp3",
-            "../../static/music/Daima_Goku.mp3",
-        ];
-
         function CancionRandom() {
-            const random = Math.floor(Math.random() * songs.length);
-            const reproductor = document.getElementById("reproductor");
+            let songs = [
+                "{% static 'music/Firelink%20Shrine.mp3' %}",
+                "{% static 'music/Daima_Goku.mp3' %}",
+            ];
+            
+            let boton = document.getElementById("btn_control");
+            let random = Math.floor(Math.random() * songs.length);
+            let reproductor = document.getElementById("reproductor2");
             reproductor.src = songs[random];
             reproductor.play();
+
+            
+            if (boton.style.display === "none"){
+                boton.style.display = "block"
+            }
+            if (boton.textContent === "Reanudar música"){
+                boton.textContent = "Detener música";
+            }
+
+
+    }
+
+    function control_reproductor(){
+
+        let reproductor = document.getElementById("reproductor2");
+        let boton = document.getElementById("btn_control");
+
+        if (!reproductor.paused) {
+            reproductor.pause();
+            boton.textContent = "Reanudar música";
+        } else {
+            reproductor.play();
+            boton.textContent = "Detener música";
         }
+
+    }
     </script>
 
 </body>
