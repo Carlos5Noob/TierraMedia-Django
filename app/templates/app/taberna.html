@@ -42,7 +42,7 @@
         }
     </style>
 </head>
-<body style='background-image: url("../../static/Inn.jpg"); background-repeat: no-repeat; background-size: cover;'>
+<body style='background-image: url("../../static/resources/Inn.jpg"); background-repeat: no-repeat; background-size: cover;'>
     <div class="text-light p-5 container text-center rounded">
 
         <div class="taberna-header">
@@ -68,7 +68,7 @@
                     {% csrf_token %}
                     <button class="btn btn-info">Hablar con el tabernero</button>
                 </form>
-                <img src="../../static/tabernero.webp" alt="tabernero" class="mt-3">
+                <img src="../../static/resources/tabernero.webp" alt="tabernero" class="mt-3">
                 <div class="message-box">
                     {% if mensaje %}
                         <p class="h4">{{ mensaje }}</p>

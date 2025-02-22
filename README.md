@@ -1,6 +1,6 @@
 # Documentación del proyecto
 
-![](app/static/tierramedia.webp)
+![](app/static/resources/tierramedia.webp)
 
 ## Objetivo
 
