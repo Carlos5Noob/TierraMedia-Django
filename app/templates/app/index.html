@@ -41,7 +41,7 @@
 
     <header style="background-color: #1D1D1D; position:relative" class="d-flex flex-wrap align-items-center justify-content-start">
         <a href="{% url 'index' %}">
-            <img src='{% static '../../resources/logo-tierra-media.png' %}' alt='home' id="imagen">
+            <img src='{% static 'resources/logo-tierra-media.png' %}' alt='home' id="imagen">
         </a>
         <form action="{% url 'logout' %}" method='POST'>
             {% csrf_token %}
