@@ -219,8 +219,8 @@ def combate(request, combate_id):
             match opcion:
                 case "hb1":
                     if jugador1.mana >= 50:
-                        mensaje_accion = f"{jugador1.nombre} lanza una onda de energía a {jugador2.nombre} causandole 200 puntos de daño."
-                        jugador2.salud -= 200
+                        mensaje_accion = f"{jugador1.nombre} lanza una onda de energía a {jugador2.nombre} causandole 150 puntos de daño."
+                        jugador2.salud -= 150
                         jugador1.mana -= 50
                         jugador1.save()
                         jugador2.save()
