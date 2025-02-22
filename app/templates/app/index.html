@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+{% load static %}
 <head>
     <meta charset="UTF-8">
     <title>Inicio</title>
@@ -17,90 +18,171 @@
             font-family: "InglesAntiguo", Serif;
             font-style: italic;
             font-weight: bold;
-            font-size: 50px;
+            font-size: 80px;
             text-align: center;
             color: lightgoldenrodyellow;
         }
+
+        #logout {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: all 0.3s ease-in-out;
+        }
+        
+        #logout:hover {
+            color: goldenrod ;
+        }
+        
+        .custom-btn {
+            background-color: #FFD700;
+            color: #1D1D1D;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 10px 20px;
+            border: 2px solid #CBA400;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .custom-btn:hover {
+            background-color: #CBA400;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .custom-btn:active {
+            transform: scale(0.95);
+        }
+
+        #imagen {
+            width:100px;
+            height:60px;
+            margin-right: 4px;
+            margin-left: 15px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        #imagen:hover {
+          transform: scale(1.1);
+        }
+
+        #menu {
+            transition: all 0.3s ease-in-out;
+        }
+        
+        #menu:hover {
+            transform: scale(1.1);
+            color: goldenrod ;
+        }
+
+
     </style>
+
 </head>
 <body style='background-image: url("../../static/Inn.jpg"); background-repeat: no-repeat; background-size: cover;'>
 
-<header style="background-color: #1D1D1D" class="d-flex flex-wrap align-items-center justify-content-start">
-   <a href="{% url 'index' %}"><img src='../../static/home(2).png' alt='home' style='width:50px;height:50px; margin-right: 10px'></a>
+<header style="background-color: #1D1D1D; position:relative" class="d-flex flex-wrap align-items-center justify-content-start">
+   <a href="{% url 'index' %}"><img src='{% static 'resources/logo-tierra-media.png' %}' alt='home' id="imagen"></a>
    <form action="{% url 'logout' %}" method='POST'>
        {% csrf_token %}
-       <button type='submit' class='btn btn-light'>Logout</button>
+       <button type='submit' class='btn btn-light' id="logout">Logout</button>
    </form>
-    <audio id="reproductor"  controls></audio>
-    <button onclick="CancionRandom()">Reproducir Canción Aleatoria</button>
+    <audio id="reproductor2" hidden="hidden" controls autoplay></audio>
+    <button onclick="CancionRandom()" class="custom-btn mx-3">Reproducir Canción Aleatoria</button>
+    <button onclick="control_reproductor()" class="custom-btn mx-3" id="btn_control" style="display: none">Detener música</button>
+
 </header>
 
     <div class="container-fluid p-5 my-5" style="text-align: center">
         <h1>¡Bienvenido, {{ usuario | capfirst | cambiar_color:"darkgoldenrod" | safe}}!</h1>
-    <br>
-        <div>
-            <a href="{% url 'index' %}">
-                <button type="button" class="btn btn-outline-light">Página Principal</button>
-            </a>
-        </div>
-    <br>
-        <div>
-            <a href="{% url 'personajes' %}">
-                <button type="button" class="btn btn-outline-light">Lista de Personajes</button>
-            </a>
-        </div>
-    <br>
-        <div>
-            <a href="{% url 'armas' %}">
-                <button type="button" class="btn btn-outline-light">Lista de Armas</button>
-            </a>
-        </div>
-    <br>
-        <div>
-            <a href="{% url 'facciones' %}">
-                <button type="button" class="btn btn-outline-light">Lista de facciones</button>
-            </a>
-        </div>
-    <br>
-        <div>
-            <a href="{% url 'ubicaciones' %}">
-                <button type="button" class="btn btn-outline-light">Lista de ubicaciones</button>
-            </a>
-        </div>
-    <br>
-        <div>
-            <a href="{% url 'lucha' %}">
-                <button type="button" class="btn btn-outline-light">¡Combate!</button>
-            </a>
-        </div>
-    <br>
-        <div>
-            <a href="{% url 'taberna' %}">
-                <button type="button" class="btn btn-outline-light">Taberna</button>
-            </a>
-        </div>
-    <br>
-        <div>
-            <a href="{% url 'crear_personaje' %}">
-                <button type="button" class="btn btn-outline-light">Crear Personaje</button">
-            </a>
-        </div>
+        <br>
+            <div>
+                <a href="{% url 'personajes' %}">
+                    <button type="button" class="btn btn-outline-light bg-dark btn-lg" id="menu">Lista de Personajes</button>
+                </a>
+            </div>
+        <br>
+            <div>
+                <a href="{% url 'armas' %}">
+                    <button type="button" class="btn btn-outline-light bg-dark btn-lg" id="menu">Lista de Armas</button>
+                </a>
+            </div>
+        <br>
+            <div>
+                <a href="{% url 'facciones' %}">
+                    <button type="button" class="btn btn-outline-light bg-dark btn-lg" id="menu">Lista de facciones</button>
+                </a>
+            </div>
+        <br>
+            <div>
+                <a href="{% url 'ubicaciones' %}">
+                    <button type="button" class="btn btn-outline-light bg-dark btn-lg" id="menu">Lista de ubicaciones</button>
+                </a>
+            </div>
+        <br>
+            <div>
+                <a href="{% url 'lucha' %}">
+                    <button type="button" class="btn btn-outline-light bg-dark btn-lg" id="menu">¡Combate!</button>
+                </a>
+            </div>
+        <br>
+            <div>
+                <a href="{% url 'taberna' %}">
+                    <button type="button" class="btn btn-outline-light bg-dark btn-lg" id="menu">Taberna</button>
+                </a>
+            </div>
+        <br>
+            <div>
+                <a href="{% url 'crear_personaje' %}">
+                    <button type="button" class="btn btn-outline-light bg-dark btn-lg" id="menu">Crear Personaje</button>
+                </a>
+            </div>
     </div>
 
 
     <script>
 
-        const songs = [
-            "../../static/music/Firelink%20Shrine.mp3",
-            "../../static/music/Daima_Goku.mp3",
-        ];
-
         function CancionRandom() {
-            const random = Math.floor(Math.random() * songs.length);
-            const reproductor = document.getElementById("reproductor");
+            let songs = [
+                "{% static 'music/Firelink%20Shrine.mp3' %}",
+                "{% static 'music/Daima_Goku.mp3' %}",
+            ];
+
+            let boton = document.getElementById("btn_control");
+            let random = Math.floor(Math.random() * songs.length);
+            let reproductor = document.getElementById("reproductor2");
             reproductor.src = songs[random];
             reproductor.play();
+
+
+            if (boton.style.display === "none"){
+                boton.style.display = "block"
+            }
+            if (boton.textContent === "Reanudar música"){
+                boton.textContent = "Detener música";
+            }
+
+
+    }
+
+    function control_reproductor(){
+
+        let reproductor = document.getElementById("reproductor2");
+        let boton = document.getElementById("btn_control");
+
+        if (!reproductor.paused) {
+            reproductor.pause();
+            boton.textContent = "Reanudar música";
+        } else {
+            reproductor.play();
+            boton.textContent = "Detener música";
         }
+
+    }
     </script>
 
 </body>
