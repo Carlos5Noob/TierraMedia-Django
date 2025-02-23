@@ -11,7 +11,7 @@ services:
     volumes:
       - .:/app
     environment:
-      - DEBUG = True
+      - DEBUG=True
 #      - DATABASE_URL=postgres://django:password@db:5432/django_db
       - EMAIL_HOST=mailpit
       - EMAIL_PORT=1025
