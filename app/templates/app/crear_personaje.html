@@ -35,7 +35,7 @@
         <h1>Bienvenido al formulario de creación de personaje</h1>
 
 
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <label class="form-label" for="nombre">Nombre:</label>
             <input class="form-control" type="text" name="nombre" id="nombre" required>
