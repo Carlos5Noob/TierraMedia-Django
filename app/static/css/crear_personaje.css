@@ -1,0 +1,44 @@
+body {
+    background-image: url("../../static/resources/fondo-crear-personaje.jpeg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+header {
+    background-color: #1D1D1D;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    padding: 10px;
+}
+
+#imagen {
+    height: 50px;
+    margin-right: 20px;
+}
+
+#logout {
+    margin-left: auto;
+}
+
+.container {
+    background-color: #a8854d;
+    box-shadow: 5px 5px 5px lightgray;
+    padding: 20px;
+    margin-top: 50px;
+    border-radius: 10px;
+}
+
+.custom-btn {
+    background-color: #ffc107;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.custom-btn:hover {
+    background-color: #e0a800;
+}

@@ -1,0 +1,33 @@
+        @font-face {
+            font-family: "InglesAntiguo";
+            src: url("../../static/fonts/OldLondon.ttf");
+        }
+
+        h1{
+            font-family: "InglesAntiguo", Serif;
+            font-style: italic;
+            font-weight: bold;
+            font-size: 80px;
+            text-align: center;
+            color: lightgoldenrodyellow;
+        }
+
+        #menu {
+            transition: all 0.3s ease-in-out;
+        }
+
+        #menu:hover {
+            transform: scale(1.1);
+            color: goldenrod ;
+        }
+
+        header{
+            background-color: #1D1D1D;
+            position: relative
+        }
+
+        body{
+            background-image: url("../../static/resources/Inn.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
