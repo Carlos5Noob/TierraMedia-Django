@@ -13,12 +13,12 @@ from django.views.generic import TemplateView, ListView, DetailView
 from .models import Personaje, Arma, Faccion, Ubicacion, Combate
 
 
-# Create your views here.
+# Crea tus vistas aquí.
 
-# All views are based on classes (except combat views), to improve the reusability of the code and the scability of the project
+# Todas las vistas están basadas en clases (excepto las de combate), para mejorar la reusabilidad del código y la escalabilidad del proyecto.
 class HomeView(LoginRequiredMixin, TemplateView):
     """
-    View for the index page
+    Vista para la página principal. (index)
     """
     template_name = "app/index.html"
     def get_context_data(self, **kwargs):
@@ -28,8 +28,8 @@ class HomeView(LoginRequiredMixin, TemplateView):
 
 class ListCharacters(LoginRequiredMixin, ListView):
     """
-    View for the list of characters.
-    There is a button to filter characters per factions
+    Vista para la lista de personajes.
+    Hay un botón para filtrarlos por facciones.
     """
     model = Personaje
     template_name = "app/lista_personajes.html"
@@ -49,7 +49,7 @@ class ListCharacters(LoginRequiredMixin, ListView):
 
 class ListWeapons(LoginRequiredMixin, ListView):
     """
-    View for the list of weapons
+    Vista para la lista de armas.
     """
     model = Arma
     template_name = "app/lista_armas.html"
@@ -60,7 +60,7 @@ class ListWeapons(LoginRequiredMixin, ListView):
 
 class ListFactions(LoginRequiredMixin, ListView):
     """
-    View for the list of factions
+    Vista para la lista de facciones.
     """
     model = Faccion
     template_name = "app/lista_facciones.html"
@@ -71,7 +71,7 @@ class ListFactions(LoginRequiredMixin, ListView):
 
 class Ubicaciones(LoginRequiredMixin, ListView):
     """
-    View for the list of locations
+    Vista para la lista de ubicaciones.
     """
     model = Ubicacion
     template_name = "app/lista_ubicaciones.html"
@@ -82,8 +82,8 @@ class Ubicaciones(LoginRequiredMixin, ListView):
 
 class DetailCharacters(LoginRequiredMixin, DetailView):
     """
-    View for the details of a character
-    This class catches the id of the character and send it to the template
+    Vista para los detalles de los personajes.
+    Esta clase recoge el ID del personaje y lo envía a la plantilla.
     """
     model = Personaje
     template_name = "app/detalles-personaje.html"
@@ -91,8 +91,8 @@ class DetailCharacters(LoginRequiredMixin, DetailView):
 
 class DetailArma(LoginRequiredMixin, DetailView):
     """
-    View for the details of a weapon
-    This class catches the id of the weapon and send it to the template
+    Vista para los detalles de las armas.
+    Esta clase recoge el ID del arma y lo envía a la plantilla.
     """
     model = Arma
     template_name = "app/detalles-arma.html"
@@ -100,8 +100,8 @@ class DetailArma(LoginRequiredMixin, DetailView):
 
 class DetailFaccion(LoginRequiredMixin, DetailView):
     """
-    View for the details of a faction
-    This class catches the id of the faction and send it to the template
+    Vista para los detalles de la facción.
+    Esta clase recoge el ID de la facción y lo envía a la plantilla.
     """
     model = Faccion
     template_name = "app/detalles-faccion.html"
@@ -109,20 +109,20 @@ class DetailFaccion(LoginRequiredMixin, DetailView):
 
 class DetailUbicacion(LoginRequiredMixin, DetailView):
     """
-    View for the details of a location
-    This class catches the id of the location and send it to the template
+    Vista para los detalles de la ubicación.
+    Esta clase recoge el ID de la ubicación y lo envía a la plantilla.
     """
     model = Ubicacion
     template_name = "app/detalles-ubicacion.html"
     context_object_name = "ubicacion"
 
-# Views for the combat, bassed on functions
+# Vistas para el combate basadas en funciones.
 @login_required()
 def pre_combate(request):
     """
-    Aqui recogemos todos los requisitos que se necesitan antes de efectaur un combate y se comrpueban.
+    Aquí recogemos todos los requisitos que se necesitan antes de efectuar un combate y se comprueban.
     Porque lo hacemos?: Para que todos los datos que se envíen sean correctos y no haya problemas a la hora de crear
-    un combate, comprobamos que existan amobos jugadores, que no se hayan seleccionado dos jugadores iguales y que el
+    un combate, comprobamos que existan ambos jugadores, que no se hayan seleccionado dos jugadores iguales y que el
     nombre del combate sea único (Usamos iexact para que la comparación sea insensible a mayúsculas y minúsculas).
     """
 
@@ -157,7 +157,7 @@ def pre_combate(request):
 @login_required
 def combate(request, combate_id):
     """
-    Aqui recogemos todos los requisitos que se necesitan para efectuar un combate
+    Aquí recogemos todos los requisitos que se necesitan para efectuar un combate
     """
     combate_creado = get_object_or_404(Combate, id=combate_id)
     jugador1 = combate_creado.luchador_1
@@ -338,7 +338,7 @@ def combate(request, combate_id):
 
 def chances():
     """
-    Function to calculate the chances that the player 2 will perform an attack special
+    Función para calcular las probabilidades de que el segundo jugador pueda realizar un ataque especial.
     """
     rng = randint(1, 10)
     if rng == 1:
@@ -346,11 +346,11 @@ def chances():
     else:
         return False
 
-# function to control the feature of the taberna
+# Función para controlar la taberna
 @login_required()
 def taberna(request):
     """
-    View for the taberna page, where characters can rest of accept missions, etc
+    Vista para la taberna, aquí el jugador puede descansar para recuperar su salud, hablar con el tabernero, jugar a los dados con él, etc.
     """
     mensaje = request.GET.get('mensaje')
     if request.method == "POST":
@@ -383,6 +383,11 @@ def hablar_npc(request):
     return redirect(reverse('taberna') + f'?mensaje={mensaje_codificado}')
 
 def dados(request):
+
+    """
+    Vista para el juego de los dados.
+    """
+
     resultado = None
     dado_jugador = None
     dado_tabernero = None
@@ -405,6 +410,10 @@ def dados(request):
     })
 
 def crear_personaje(request):
+
+    """
+    Vista para la creación de personajes.
+    """
 
     armas = Arma.objects.all()
     facciones = Faccion.objects.all()
