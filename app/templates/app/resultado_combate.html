@@ -66,7 +66,7 @@
     <div class="combat-container">
         <div class="fighter">
             {% if jugador1.foto %}
-                <img src="{% static 'fotos_proyecto/' %}{{ jugador1.foto.name }}" alt="{{ jugador1.nombre }}">
+                <img src="{{ jugador1.foto.url }}" alt="{{ jugador1.nombre }}">
             {% endif %}
             <div class="stats">
                 <p><strong>{{ jugador1.nombre }}</strong></p>
@@ -77,7 +77,7 @@
         <div class="versus">VS</div>
         <div class="fighter">
             {% if jugador2.foto %}
-                <img style= "transform: scaleX(-1)" src="{% static 'fotos_proyecto/' %}{{ jugador2.foto.name }}" alt="{{ jugador2.nombre }}">
+                <img style= "transform: scaleX(-1)" src="{{ jugador2.foto.url }}" alt="{{ jugador2.nombre }}">
             {% endif %}
             <div class="stats">
                 <p><strong>{{ jugador2.nombre }}</strong></p>
