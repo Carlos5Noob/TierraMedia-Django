@@ -1,0 +1,51 @@
+# version: "3.9"
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: django_web
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    environment:
+      - DEBUG=True
+#      - DATABASE_URL=postgres://django:password@db:5432/django_db
+      - EMAIL_HOST=mailpit
+      - EMAIL_PORT=1025
+    user: "${UID}:${GID}"
+    depends_on:
+      - db
+      - mailpit
+    command: python manage.py runserver 0.0.0.0:8000
+
+  db:
+    image: postgres:16
+    container_name: postgres_db
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: django
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: django_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  mailpit:
+    image: axllent/mailpit
+    container_name: mailpit
+    volumes:
+      - ./data:/data
+    ports:
+      - "8025:8025"
+      - "1025:1025"
+    environment:
+      MP_MAX_MESSAGES: 5000
+      MP_DATABASE: /data/mailpit.db
+      MP_SMTP_AUTH_ACCEPT_ANY: 1
+      MP_SMTP_ALLOW_INSECURE: 1
+
+volumes:
+  postgres_data:
