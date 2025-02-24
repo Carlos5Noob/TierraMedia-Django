@@ -1,0 +1,26 @@
+.contenedor {
+    max-width: 500px;
+    margin: auto;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+}
+ button {
+     background-color: #8b5e34;
+     color: white;
+     border: none;
+     padding: 10px 20px;
+     font-size: 18px;
+     border-radius: 5px;
+     cursor: pointer;
+ }
+
+button:hover {
+    background-color: #a97c50;
+}
+
+ .resultado {
+     margin-top: 20px;
+     font-size: 20px;
+ }

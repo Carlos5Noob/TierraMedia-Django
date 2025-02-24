@@ -25,4 +25,3 @@ Aplicación web funcional donde los usuarios, al autenticarse en el sistema, pue
 1. Carlos Chacón Atienza - https://github.com/Carlos5Noob
 2. Álvaro Fernández de la Calle - https://github.com/Alvarokstar
 3. Jonatan García Luna - https://github.com/JonatanGarLun
-
