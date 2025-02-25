@@ -1,8 +1,11 @@
-from django.urls import path
-from .views import ApiRootView, PersonajeListCreateAPIView, PersonajeDetailAPIView
+from django.urls import path, include
+from rest_framework import routers
+from .views import PersonajeViewSet, ApiRootViewSet
+
+router = routers.DefaultRouter()
+router.register(r'personajes', PersonajeViewSet)
+router.register(r'', ApiRootViewSet, basename='api-root')
 
 urlpatterns = [
-    path('', ApiRootView.as_view(), name='api-root'),  # Agregamos la API root aquí
-    path('api/personajes/', PersonajeListCreateAPIView.as_view(), name='personaje-list-create'),
-    path('api/personajes/<int:pk>/', PersonajeDetailAPIView.as_view(), name='personaje-detail'),
+    path('', include(router.urls)),
 ]

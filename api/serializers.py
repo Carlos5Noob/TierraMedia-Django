@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from app.models import Personaje  # Importa el modelo correcto
+from app.models import Personaje
 
 class PersonajeSerializer(serializers.ModelSerializer):
     class Meta:
