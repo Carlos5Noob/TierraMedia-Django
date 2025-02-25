@@ -6,7 +6,8 @@ from app import views
 # paths de la aplicación
 
 urlpatterns = [
-    path('', views.HomeView.as_view(), name='index'),
+    path('', views.InicioView.as_view(), name='inicio' ),
+    path('home/', views.HomeView.as_view(), name='index'),
     path('personajes/', views.ListCharacters.as_view(), name='personajes'),
     path('armas/', views.ListWeapons.as_view(), name='armas'),
     path('facciones/', views.ListFactions.as_view(), name='facciones'),

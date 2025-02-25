@@ -16,14 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('api.urls')),
+    path('api/', include('api.urls')), # el path donde van las urls de la api
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path('game/', include("app.urls")), # el path donde se incluyen las urls de la aplicación
+    path('', include("app.urls")), # el path donde se incluyen las urls de la aplicación
     path('tierramedia/', include("django.contrib.auth.urls")), # el path donde se incluyen las urls de autenticación
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

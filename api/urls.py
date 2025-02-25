@@ -2,6 +2,8 @@ from django.urls import path, include
 from rest_framework import routers
 from .views import PersonajeViewSet, ArmaViewSet, FaccionViewSet, UbicacionViewSet, ApiRootViewSet
 
+app_name = "api"
+
 router = routers.DefaultRouter()
 router.register(r'personajes', PersonajeViewSet)
 router.register(r'armas', ArmaViewSet)

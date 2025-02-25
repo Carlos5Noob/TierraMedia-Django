@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bienvenido a la Tierra Media</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #2d2d2d;
+            color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        h1 {
+            font-family: 'Times New Roman', serif;
+            font-size: 4em;
+            margin-top: 50px;
+            color: #ffd700; /* Dorado, al estilo de los Anillos */
+        }
+        .background {
+            background-image: url({% static 'resources/portada.jpg' %}); /* Cambia este enlace por la URL de una imagen del Señor de los Anillos */
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            opacity: 0.8;
+        }
+        .content {
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 40px;
+            border-radius: 15px;
+            width: 80%;
+            max-width: 600px;
+        }
+        .button {
+            background-color: #ffd700;
+            color: #2d2d2d;
+            font-size: 1.2em;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            margin: 10px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .button:hover {
+            background-color: #ffcc00;
+        }
+        div>p {
+            padding-bottom: 15px ;
+        }
+        .footer {
+            background-color: rgba(0, 0, 0, 0.6);
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            color: #ddd;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="background">
+        <div class="content">
+            <h1>Bienvenido a la Tierra Media</h1>
+            <p>Prepárate para vivir una aventura épica en la que tu destino estará en tus manos.</p>
+            <div>
+                    <a href="{% url 'index' %}" class="button">Comenzar Aventura</a>
+                    <a href="{% url 'api:api-root' %}" class="button">Explorar nuestros contenidos</a>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <p>&copy; 2025 Tierra Media - Todos los derechos reservados</p>
+    </div>
+</body>
+</html>

@@ -16,6 +16,9 @@ from .models import Personaje, Arma, Faccion, Ubicacion, Combate
 # Crea tus vistas aquí.
 
 # Todas las vistas están basadas en clases (excepto las de combate), para mejorar la reusabilidad del código y la escalabilidad del proyecto.
+class InicioView(TemplateView):
+    template_name = "app/inicio.html"
+
 class HomeView(LoginRequiredMixin, TemplateView):
     """
     Vista para la página principal. (index)
@@ -267,7 +270,7 @@ def combate(request, combate_id):
             jugador2.save()
 
         if jugador2.salud <= 0:
-            derrota_j2 = f"{jugador2.nombre} ha sido derrotado, enhorabuena."
+            derrota_j2 = f"{jugador2.nombre} ha sido derrotado, enhorabuena"
             jugador2.salud = 200
             jugador2.save()
             return render(request, "app/resolucion.html", {"combate": combate_creado, "resolucion_2": derrota_j2})
@@ -307,6 +310,11 @@ def combate(request, combate_id):
                 jugador2.salud -= 100
                 jugador2.save()
 
+        if jugador1.salud <= 0:
+            derrota_j1 = f"{jugador1.nombre} ha sido derrotado, se acabó"
+            jugador1.salud = 1
+            jugador1.save()
+            return render(request, "app/resolucion.html", {"combate": combate_creado, "resolucion_1": derrota_j1})
 
         return render(request, "app/resultado_combate.html", {
             "combate": combate_creado,
@@ -326,9 +334,6 @@ def combate(request, combate_id):
             "mensaje_veneno_j2_2" : mensaje_veneno_j2_2,
             "mensaje_mana": mensaje_mana,
         })
-    if jugador1.salud <= 0:
-        derrota_j1 = f"{jugador1.nombre} ha sido derrotado, se acabó"
-        return render(request, "app/resolucion.html", {"combate": combate_creado, "resolucion_1": derrota_j1})
 
     return render(request, "app/resultado_combate.html", {
         "combate": combate_creado,

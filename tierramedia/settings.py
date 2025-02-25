@@ -141,8 +141,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Settings for the login and logout pages
 LOGIN_URL = "/tierramedia/login/"
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/game/'
+LOGIN_REDIRECT_URL = '/home/'
+LOGOUT_REDIRECT_URL = '/'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [

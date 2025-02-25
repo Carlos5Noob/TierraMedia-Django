@@ -10,7 +10,10 @@
     <style>
         body {
             background-image: url('{% static "resources/kratos-tyr.jpg" %}');
+            background-repeat: no-repeat;
+            background-size: cover;
         }
+
     </style>
 </head>
 <body>
@@ -35,7 +38,7 @@
             {% if combate.turnos <= 1 %}
                 <p>{{ combate.luchador_1 }} se encuentra demasiado cansado para luchar,debería ir a la taberna a descansar</p>
             {% else %}
-                <h2>Tras una ardua batalla... {{ resolucion_1 }}...</h2>
+                <h2>Tras una ardua batalla... {{ resolucion_1 }}</h2>
             {% endif %}
         {% endif %}
         {% if resolucion_2 %}

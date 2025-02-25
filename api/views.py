@@ -5,7 +5,6 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from app.models import Personaje, Arma, Faccion, Ubicacion
 from .serializers import PersonajeSerializer, ArmaSerializer, FaccionSerializer, UbicacionSerializer
 
-
 class PersonajeViewSet(viewsets.ModelViewSet):
     queryset = Personaje.objects.all()
     serializer_class = PersonajeSerializer
@@ -29,8 +28,8 @@ class UbicacionViewSet(viewsets.ModelViewSet):
 class ApiRootViewSet(viewsets.ViewSet):
     def list(self, request):
         return Response({
-            'personajes': request.build_absolute_uri(reverse('personaje-list', request=request)),
-            'armas': request.build_absolute_uri(reverse('arma-list', request=request)),
-            'facciones': request.build_absolute_uri(reverse('faccion-list', request=request)),
-            'ubicaciones': request.build_absolute_uri(reverse('ubicacion-list', request=request))
+            'personajes': request.build_absolute_uri(reverse('api:personaje-list', request=request)),
+            'armas': request.build_absolute_uri(reverse('api:arma-list', request=request)),
+            'facciones': request.build_absolute_uri(reverse('api:faccion-list', request=request)),
+            'ubicaciones': request.build_absolute_uri(reverse('api:ubicacion-list', request=request))
         })
