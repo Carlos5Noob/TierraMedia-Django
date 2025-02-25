@@ -1,10 +1,7 @@
-from django.urls import path, include
-from rest_framework.routers import DefaultRouter
-from .views import MiModeloViewSet
-
-router = DefaultRouter()
-router.register(r'mimodelo', MiModeloViewSet)
+from django.urls import path
+from .views import PersonajeListCreateAPIView, PersonajeDetailAPIView
 
 urlpatterns = [
-    path('api/', include(router.urls)),
+    path('api/personajes/', PersonajeListCreateAPIView.as_view(), name='personaje-list-create'),
+    path('api/personajes/<int:pk>/', PersonajeDetailAPIView.as_view(), name='personaje-detail'),
 ]
