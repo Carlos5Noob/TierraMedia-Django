@@ -7,40 +7,126 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <link href="{% static 'css/login.css' %}" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f7fa;
+            font-family: Arial, sans-serif;
+        }
+
+        .contenedor {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .form-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #4CAF50;
+        }
+
+        .form-container .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-container label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-container input[type="text"],
+        .form-container input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .form-container input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-container input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .form-container .forgot-password {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .form-container .forgot-password a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .form-container .forgot-password a:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: red;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
 
 {% if form.errors %}
-<p style="color: red;">Usuario o contraseña erróneos. Porfavor, inténtelo de nuevo.</p>
+<p class="error-message">Usuario o contraseña erróneos. Por favor, inténtelo de nuevo.</p>
 {% endif %}
 {% if next %}
     {% if user.is_authenticated %}
-    <p>Su cuenta no tiene acceso a esta página. Para proceder,
-    por favor inicie sesión con una cuenta que tenga acceso.</p>
+    <p style="color: red; text-align: center;">Su cuenta no tiene acceso a esta página. Para proceder, por favor inicie sesión con una cuenta que tenga acceso.</p>
     {% else %}
-    <p style="color: lightgoldenrodyellow; margin-top: 100px; font-size: 30px" class="d-flex justify-content-center align-items-center">Por favor inicie sesión para ver esta página.</p>
+    <p style="color: black; margin-top: 100px; font-size: 30px" class="d-flex justify-content-center align-items-center">Por favor inicie sesión para ver esta página.</p>
     {% endif %}
 {% endif %}
 
-<div class="contenedor d-flex justify-content-center align-items-center">
-<form method="post" action="{% url 'login' %}">
-{% csrf_token %}
-<table>
-<tr>
-    <td style="color: lightgoldenrodyellow;">{{ form.username.label_tag }}</td>
-    <td >{{ form.username }}</td>
-</tr>
-<tr>
-    <td style="color: lightgoldenrodyellow;">{{ form.password.label_tag }}</td>
-    <td>{{ form.password }}</td>
-</tr>
-</table>
+<div class="contenedor">
+    <div class="form-container">
+        <h2>Iniciar sesión</h2>
+        <form method="post" action="{% url 'login' %}">
+            {% csrf_token %}
 
-<input type="submit" value="login">
-<input type="hidden" name="next" value="{{ next }}">
-</form>
+            <div class="form-group">
+                <label for="username">{{ form.username.label }}</label>
+                {{ form.username }}
+            </div>
 
-<p><a href="{% url 'password_reset' %}">¿Olvidaste tu contraseña?</a></p>
+            <div class="form-group">
+                <label for="password">{{ form.password.label }}</label>
+                {{ form.password }}
+            </div>
+
+            <input type="submit" value="Iniciar sesión">
+            <input type="hidden" name="next" value="{{ next }}">
+        </form>
+
+        <div class="forgot-password">
+            <p><a href="{% url 'password_reset' %}">¿Olvidaste tu contraseña?</a></p>
+        </div>
+    </div>
 </div>
 
 </body>
