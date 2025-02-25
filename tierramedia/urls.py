@@ -22,6 +22,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('api.urls')),
     path('game/', include("app.urls")), # el path donde se incluyen las urls de la aplicación
     path('tierramedia/', include("django.contrib.auth.urls")), # el path donde se incluyen las urls de autenticación
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

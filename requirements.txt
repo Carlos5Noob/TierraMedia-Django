@@ -3,3 +3,6 @@ psycopg2==2.9.10
 django-extensions
 pillow
 ipdb
+
+httpie
+djangorestframework
