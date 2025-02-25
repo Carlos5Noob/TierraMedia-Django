@@ -21,6 +21,10 @@ Aplicación web funcional donde los usuarios, al autenticarse en el sistema, pue
 4. **Cascading Style Sheets (CSS)** - Lenguaje de diseño utilizado para describir la presentación de las páginas web. CSS se usa para aplicar estilos visuales y definir la apariencia de los elementos dentro del proyecto.
 5. **HyperText Markup Language (HTML)** - Lenguaje de marcado utilizado para estructurar el contenido de las páginas web. HTML permite organizar y mostrar texto, imágenes, enlaces y otros elementos dentro del navegador, creando la base de cada página web mediante el uso de etiquetas, que indican cómo debe organizarse y presentarse el contenido al usuario.
 
+## TODO
+
+- Página de estadísticas
+
 ## Desarrolladores del proyecto
 1. Carlos Chacón Atienza - https://github.com/Carlos5Noob
 2. Álvaro Fernández de la Calle - https://github.com/Alvarokstar
