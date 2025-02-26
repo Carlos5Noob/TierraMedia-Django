@@ -12,6 +12,7 @@ Aplicación web funcional donde los usuarios, al autenticarse en el sistema, pue
 - **manage.py:** Archivo que permite ejecutar comandos como iniciar el servidor (`runserver`), aplicar migraciones (`migrate`), crear usuarios (`createsuperuser`), entre otros. Es esencial para la administración y desarrollo de la aplicación Django.
 - **tierramedia/:** Directorio que almacena los archivos esenciales para la configuración y gestión global del proyecto, incluyendo ajustes, rutas y puntos de entrada para el servidor.
 - **app/:** Directorio que contiene las funcionalidades principales de la aplicación web, como las URLs, vistas, modelos de datos, etc.
+- **api/:** Directorio donde se alamacenan los serializadores y vistas de las apis del proyecto.
 
 ## Tecnologías utilizadas
 
