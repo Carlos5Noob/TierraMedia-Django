@@ -47,6 +47,8 @@ def poblar_personajes(apps, schema_editor):
     Personaje.objects.create(
         nombre='Aragorn',
         salud=120,
+        victorias=10,
+        derrotas=5,
         mana=50,
         arma=anduril,
         faccion=hombres_del_oeste,
@@ -57,6 +59,8 @@ def poblar_personajes(apps, schema_editor):
     Personaje.objects.create(
         nombre='Legolas',
         salud=100,
+        victorias=5,
+        derrotas=10,
         mana=70,
         arma=flecha_negra,
         faccion=elfos,

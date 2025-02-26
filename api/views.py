@@ -10,6 +10,40 @@ class PersonajeViewSet(viewsets.ModelViewSet):
     serializer_class = PersonajeSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
 
+    def get_personaje_estadisticas(self, request, pk):
+        try:
+            personaje = Personaje.objects.get(pk=pk)
+
+            # Calculamos el ratio de victorias
+            total_batallas = personaje.victorias + personaje.derrotas
+            if total_batallas > 0:
+                ratio_victorias = personaje.victorias / total_batallas
+            else:
+                ratio_victorias = 0
+
+            # Obtenemos el arma, la facción y la ubicación
+            arma = personaje.arma.nombre
+            faccion = personaje.faccion.nombre
+            ubicacion = personaje.ubicacion.nombre
+
+            # Creamos una respuesta con las estadísticas
+            estadisticas = {
+                'nombre': personaje.nombre,
+                'salud': personaje.salud,
+                'mana': personaje.mana,
+                'victorias': personaje.victorias,
+                'derrotas': personaje.derrotas,
+                'arma': arma,
+                'faccion': faccion,
+                'ubicacion': ubicacion,
+                'foto': personaje.foto.url if personaje.foto else None,
+                'ratio_victorias': round(ratio_victorias * 100, 2)
+            }
+
+            return Response(estadisticas)
+        except Personaje.DoesNotExist:
+            return Response({'error': 'Personaje no encontrado'}, status=404)
+
 class ArmaViewSet(viewsets.ModelViewSet):
     queryset = Arma.objects.all()
     serializer_class = ArmaSerializer

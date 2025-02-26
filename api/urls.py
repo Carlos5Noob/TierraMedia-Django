@@ -13,4 +13,5 @@ router.register(r'', ApiRootViewSet, basename='api-root')
 
 urlpatterns = [
     path('', include(router.urls)),
+        path('personaje/<int:pk>/estadisticas/', PersonajeViewSet.as_view({'get': 'get_personaje_estadisticas'}), name='personaje-estadisticas'),
 ]
