@@ -31,6 +31,22 @@ Aplicación web funcional donde los usuarios, al autenticarse en el sistema, pue
 - docker ps (verifica que el servicio está ejecutándose)
 - firefox localhost:8000 
 
+## Consideraciones importantes
+
+1. El proyecto guarda una lista de armas, facciones y ubicaciones ya creadas por defecto. El usuario no puede modificar ni añadir nuevos objetos de dichas clases. Sin embargo, el usuario sí podrá a través de un formulario añadir nuevos personajes, a parte de los dos creados ya (Aragorn y Legolas). La foto que suba el usuario en el formulario se guardará en el directorio *media/*.
+
+2. Hemos diferenciado el videojuego de la api, separándolos por aplicaciones diferentes. Esto lo hemos hecho así para que sea más cómodo trabajar en el código y haya más reutilización. 
+
+3. El middleware añadido en el proyecto se utiliza para ver los tiempos de respuesta del servidor. 
+
+4. El template tag utilizado se usa para cambiar el color de un texto; en nuestro caso lo hemos usado para modificar el color del nombre del usuario en la página principal. 
+
+5. Importante crear un superusuario para poder hacer login en la aplicación web. 
+
+6. Hemos creado el mayor número de tests posibles pero por falta de tiempo y desarrollo no hemos podido terminarlos. Asumimos las consecuencias. 
+
+7. A disfrutar del juego 😉
+
 ## Desarrolladores del proyecto
 1. Carlos Chacón Atienza - https://github.com/Carlos5Noob
 2. Álvaro Fernández de la Calle - https://github.com/Alvarokstar
