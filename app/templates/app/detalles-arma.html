@@ -11,6 +11,8 @@
  <style>
     body {
         background-image: url('{% static "resources/fondo-detalles.jpg" %}');
+        background-repeat: no-repeat;
+        background-size: cover;
     }
  </style>
 </head>
@@ -39,7 +41,7 @@
 
 <li style="list-style-type: none;">Nombre: {{ arma }}</li>
 <li style="list-style-type: none;">Daño: {{ arma.dano }}</li>
-<li style="list-style-type: none;">Daño crítico: {{ arma.critico }}%</li>
+<li style="list-style-type: none;">Daño crítico: {{ arma.critico }}+</li>
 
 
 </div>
