@@ -26,16 +26,14 @@
   </header>
 
 
-
-
    <h1>Personajes jugables: </h1>
 
 
    {% if personajes %}
         <div class="container bg-secondary p-3 mt-5 rounded">
-           <h3 class="text-light container">Listar por facción:</h3>
+           <h3 style="background-color: rgba(255,239,61,0.91); color: black" class="text-light container">Listar por facción:</h3>
            <form method="GET">
-                <select class="form-select container" name="faccion" id="listar" onchange="this.form.submit()">
+                <select style="background-color: rgba(255,239,61,0.91)" class="form-select container" name="faccion" id="listar" onchange="this.form.submit()">
                 <option value="" {% if not request.GET.faccion %}selected{% endif %}>Listar todos</option>
                 {% for faccion in facciones %}
                     <option value="{{ faccion.id }}" {% if request.GET.faccion == faccion.id|stringformat:"s" %}selected{% endif %}>{{ faccion }}</option>
@@ -46,26 +44,19 @@
 
        <ul class="col-3">
 
+                  {% for personaje in personajes %}
+                        <div style="margin-left: 680px; position: relative;" class="container text-bg-light p-3 rounded col-.-">
+                          <a href="{% url 'personajes_id' personaje.id %}">{{ personaje }}</a>
 
-          {% for personaje in personajes %}
-
-                <div class="text-bg-light p-3 rounded">
-                  <a href="{% url 'personajes_id' personaje.id %}">{{ personaje }}</a>
-
-
-                  <ul class="list-group">
-                      <li class="list-group-item">Salud: {{ personaje.salud }}</li>
-                      <li class="list-group-item">Arma: <a href="{% url 'armas_id' personaje.arma.id %}">{{ personaje.arma }}</a></li>
-                      <li class="list-group-item">Facción: <a href="{% url 'facciones_id' personaje.faccion.id %}">{{ personaje.faccion }}</a></li>
-                      <li class="list-group-item">Ubicación: <a href="{% url 'ubicaciones_id' personaje.ubicacion.id %}">{{ personaje.ubicacion }}</a></li>
-                  </ul>
-              </li>
-                </div>
-          {% endfor %}
-
-
+                          <ul class="list-group">
+                              <li class="list-group-item">Salud: {{ personaje.salud }}</li>
+                              <li class="list-group-item">Arma: <a href="{% url 'armas_id' personaje.arma.id %}">{{ personaje.arma }}</a></li>
+                              <li class="list-group-item">Facción: <a href="{% url 'facciones_id' personaje.faccion.id %}">{{ personaje.faccion }}</a></li>
+                              <li class="list-group-item">Ubicación: <a href="{% url 'ubicaciones_id' personaje.ubicacion.id %}">{{ personaje.ubicacion }}</a></li>
+                          </ul>
+                        </div>
+                  {% endfor %}
        </ul>
-
     {% else %}
 
        <h2 class="text-danger text-center">No hay personajes disponibles</h2>
