@@ -271,6 +271,9 @@ def combate(request, combate_id):
 
         if jugador2.salud <= 0:
             derrota_j2 = f"{jugador2.nombre} ha sido derrotado, enhorabuena"
+            jugador1.victorias += 1
+            jugador1.save()
+            jugador2.derrotas += 1
             jugador2.salud = 200
             jugador2.save()
             return render(request, "app/resolucion.html", {"combate": combate_creado, "resolucion_2": derrota_j2})
@@ -312,7 +315,10 @@ def combate(request, combate_id):
 
         if jugador1.salud <= 0:
             derrota_j1 = f"{jugador1.nombre} ha sido derrotado, se acabó"
+            jugador2.victorias += 1
+            jugador2.save()
             jugador1.salud = 1
+            jugador1.derrotas += 1
             jugador1.save()
             return render(request, "app/resolucion.html", {"combate": combate_creado, "resolucion_1": derrota_j1})
 
