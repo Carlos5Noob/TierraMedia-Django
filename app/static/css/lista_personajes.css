@@ -44,7 +44,7 @@ ul {
     margin: 0 1rem;
     padding: 0.5rem 1rem;
     border: none;
-    background-color: #fff;
+    background-color: goldenrod;
     color: #000;
     cursor: pointer;
     transition: background-color 0.3s ease;

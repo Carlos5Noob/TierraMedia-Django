@@ -35,7 +35,7 @@
    {% if ubicaciones %}
        {% for ubicacion in ubicaciones %}
            <ul>
-               <li><a href="{% url 'ubicaciones_id' ubicacion.id %}">{{ ubicacion }}</a></li>
+               <li><a href="{% url 'ubicaciones_id' ubicacion.id %}" class="btn btn-outline-light btn-lg m-3 custom-btn">{{ ubicacion }}</a></li>
            </ul>
        {% endfor %}
    {% endif %}

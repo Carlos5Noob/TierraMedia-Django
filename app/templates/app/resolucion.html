@@ -9,9 +9,20 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <style>
         body {
-            background-image: url('{% static "resources/kratos-tyr.jpg" %}');
+            background-image: url('{% static "resources/final_batalla.jpg" %}');
             background-repeat: no-repeat;
             background-size: cover;
+        }
+
+        #botones {
+            transition: all 0.3s ease-in-out;
+            background-color: #1D1D1D;
+        }
+
+        #botones:hover {
+            transform: scale(1.1);
+            color: goldenrod ;
+            background-color: white;
         }
 
     </style>
@@ -31,7 +42,7 @@
         <button onclick="control_reproductor()" class="custom-btn mx-3" id="btn_control" style="display: none">Detener música</button>
     </header>
 
-    <div class="text-bg-dark p-4 container mt-5 rounded shadow-lg">
+    <div class="container  text-white p-4 mt-5 rounded shadow-lg" style="background-color: rgba(0, 0, 0, 0.7);">
         <h1>Resolución del conflicto</h1>
 
         {% if resolucion_1 %}
@@ -51,9 +62,17 @@
 
         <h2>¿Que desea hacer ahora?</h2>
 
-        <a href="{% url 'index' %}">Volver al inicio</a>
-        <a href="{% url 'personajes' %}">Ir al listado de personajes</a>
-        <a href="{% url 'lucha' %}">Empezar otro combate</a>
+        <div class="d-flex align-items-center">
+            <a href="{% url 'index' %}" style="text-decoration: none">
+                <button type="button" class="btn btn-outline-light btn-lg m-3" id="botones">Volver al inicio</button>
+            </a>
+            <a href="{% url 'personajes' %}" style="text-decoration: none">
+                <button type="button" class="btn btn-outline-light btn-lg m-3" id="botones">Ir al listado de personajes</button>
+            </a>
+            <a href="{% url 'lucha' %}" style="text-decoration: none">
+                <button type="button" class="btn btn-outline-light btn-lg m-3" id="botones">Empezar otro combate</button>
+            </a>
+        </div>
     </div>
 
     <script>

@@ -10,6 +10,22 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     {% load custom_tags %}
 
+    <style>
+        body{
+            background-image: url("{% static 'resources/Inn.jpg' %}");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        #menu {
+            transition: all 0.3s ease-in-out;
+            background-color: #1D1D1D;
+        }
+        #menu:hover {
+            transform: scale(1.1);
+            color: goldenrod ;
+            background-color: white;
+        }
+    </style>
 
 </head>
 <body>
@@ -32,49 +48,49 @@
         <br>
         <div>
             <a href="{% url 'personajes' %}">
-                <button type="button" class="btn btn-outline-light bg-dark btn-lg" id="menu">Lista de Personajes</button>
+                <button type="button" class="btn btn-outline-light btn-lg" id="menu">Lista de Personajes</button>
             </a>
         </div>
         <br>
         <div>
             <a href="{% url 'armas' %}">
-                <button type="button" class="btn btn-outline-light bg-dark btn-lg" id="menu">Lista de Armas</button>
+                <button type="button" class="btn btn-outline-light btn-lg" id="menu">Lista de Armas</button>
             </a>
         </div>
         <br>
         <div>
             <a href="{% url 'facciones' %}">
-                <button type="button" class="btn btn-outline-light bg-dark btn-lg" id="menu">Lista de facciones</button>
+                <button type="button" class="btn btn-outline-light btn-lg" id="menu">Lista de facciones</button>
             </a>
         </div>
         <br>
         <div>
             <a href="{% url 'ubicaciones' %}">
-                <button type="button" class="btn btn-outline-light bg-dark btn-lg" id="menu">Lista de ubicaciones</button>
+                <button type="button" class="btn btn-outline-light btn-lg" id="menu">Lista de ubicaciones</button>
             </a>
         </div>
         <br>
         <div>
             <a href="{% url 'lucha' %}">
-                <button type="button" class="btn btn-outline-light bg-dark btn-lg" id="menu">¡Combate!</button>
+                <button type="button" class="btn btn-outline-light btn-lg" id="menu">¡Combate!</button>
             </a>
         </div>
         <br>
         <div>
             <a href="{% url 'registro-combates' %}">
-                <button type="button" class="btn btn-outline-light bg-dark btn-lg" id="menu">Registro de combates</button>
+                <button type="button" class="btn btn-outline-light btn-lg" id="menu">Registro de combates</button>
             </a>
         </div>
         <br>
         <div>
             <a href="{% url 'taberna' %}">
-                <button type="button" class="btn btn-outline-light bg-dark btn-lg" id="menu">Taberna</button>
+                <button type="button" class="btn btn-outline-light btn-lg" id="menu">Taberna</button>
             </a>
         </div>
         <br>
         <div>
             <a href="{% url 'crear_personaje' %}">
-                <button type="button" class="btn btn-outline-light bg-dark btn-lg" id="menu">Crear Personaje</button>
+                <button type="button" class="btn btn-outline-light btn-lg" id="menu">Crear Personaje</button>
             </a>
         </div>
     </div>

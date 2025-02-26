@@ -1,5 +1,5 @@
 body {
-    background-image: url("../../static/resources/Medieval-Blacksmiths.jpg");
+    background-image: url("../resources/Medieval-Blacksmiths.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -11,14 +11,6 @@ header {
     flex-wrap: wrap;
     align-items: center;
     justify-content: start;
-}
-
-#imagen {
-    max-width: 100px;
-}
-
-#logout {
-    margin-left: 15px;
 }
 
 .container {
@@ -39,7 +31,7 @@ ul {
     text-align: center;
 }
 
-.custom-btn {
+.custom-btn::after header {
     margin: 0 1rem;
     padding: 0.5rem 1rem;
     border: none;
@@ -49,6 +41,21 @@ ul {
     transition: background-color 0.3s ease;
 }
 
-.custom-btn:hover {
+.custom-btn:hover::after header {
     background-color: #ddd;
 }
+
+a {
+    text-decoration: none;
+    font-size: 25px;
+    font-weight: bold;
+}
+#arma {
+    transition: all 0.3s ease-in-out;
+    background-color: #1D1D1D;
+}
+#arma:hover {
+      transform: scale(1.1);
+      color: goldenrod ;
+      background-color: white;
+  }
