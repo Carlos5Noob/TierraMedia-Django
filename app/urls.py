@@ -18,6 +18,7 @@ urlpatterns = [
     path('ubicaciones/<int:pk>/', views.DetailUbicacion.as_view(), name='ubicaciones_id'),
     path('combate/', views.pre_combate, name='lucha'),
     path("combate/<int:combate_id>/", views.combate, name="combate"),
+    path('registro-combates/', views.RegistroCombates.as_view(), name='registro-combates'),
     path("taberna/", views.taberna, name='taberna'),
     path('taberna/hablar/', views.hablar_npc, name='hablar_npc'),
     path('taberna/dados/', views.dados, name='dados'),
