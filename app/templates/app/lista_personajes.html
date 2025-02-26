@@ -26,8 +26,6 @@
   </header>
 
 
-
-
    <h1>Personajes jugables: </h1>
 
 
@@ -46,26 +44,19 @@
 
        <ul class="col-3">
 
+                  {% for personaje in personajes %}
+                        <div style="margin-left: 680px; position: relative;" class="container text-bg-light p-3 rounded col-.-">
+                          <a href="{% url 'personajes_id' personaje.id %}">{{ personaje }}</a>
 
-          {% for personaje in personajes %}
-
-                <div class="text-bg-light p-3 rounded">
-                  <a href="{% url 'personajes_id' personaje.id %}">{{ personaje }}</a>
-
-
-                  <ul class="list-group">
-                      <li class="list-group-item">Salud: {{ personaje.salud }}</li>
-                      <li class="list-group-item">Arma: <a href="{% url 'armas_id' personaje.arma.id %}">{{ personaje.arma }}</a></li>
-                      <li class="list-group-item">Facción: <a href="{% url 'facciones_id' personaje.faccion.id %}">{{ personaje.faccion }}</a></li>
-                      <li class="list-group-item">Ubicación: <a href="{% url 'ubicaciones_id' personaje.ubicacion.id %}">{{ personaje.ubicacion }}</a></li>
-                  </ul>
-              </li>
-                </div>
-          {% endfor %}
-
-
+                          <ul class="list-group">
+                              <li class="list-group-item">Salud: {{ personaje.salud }}</li>
+                              <li class="list-group-item">Arma: <a href="{% url 'armas_id' personaje.arma.id %}">{{ personaje.arma }}</a></li>
+                              <li class="list-group-item">Facción: <a href="{% url 'facciones_id' personaje.faccion.id %}">{{ personaje.faccion }}</a></li>
+                              <li class="list-group-item">Ubicación: <a href="{% url 'ubicaciones_id' personaje.ubicacion.id %}">{{ personaje.ubicacion }}</a></li>
+                          </ul>
+                        </div>
+                  {% endfor %}
        </ul>
-
     {% else %}
 
        <h2 class="text-danger text-center">No hay personajes disponibles</h2>
