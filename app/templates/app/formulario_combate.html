@@ -9,8 +9,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <style>
         body {
-            background-image: url('{% static "resources/pre_combate.jpg" %}');
+            background-color: #6c757d;
             background-size: cover;
+        }
+        .estadisticas {
+            display: none;
         }
     </style>
 </head>
@@ -29,73 +32,130 @@
         <button onclick="control_reproductor()" class="custom-btn mx-3" id="btn_control" style="display: none">Detener música</button>
     </header>
 
-    <div class="text-bg-danger p-4 container mt-5 rounded shadow-lg">
-        <h1>Formulario de combate</h1>
+    <div class="container text-center text-white p-5 mt-5 rounded shadow-lg" style="background-color: rgba(0, 0, 0, 0.5);">
+        <h1 class="mb-4">Formulario de Combate</h1>
 
         <ul>
             {% if mensaje_error %}
-                <li style="color: red;">{{ mensaje_error }}</li>
+                <li style="color: red; list-style-type: none">{{ mensaje_error }}</li>
             {% endif %}
-
         </ul>
 
-        <h3>Seleccione sus combatientes</h3>
+        <h3 class="mb-4">Seleccione sus combatientes</h3>
 
         <form method="post" action="{% url 'lucha' %}">
             {% csrf_token %}
-            <label for="nombre_combate">Proporcione un nombre a esta épica batalla: </label>
-            <input type="text"  name="nombre_combate" id="nombre_combate" required>
-            <br><br>
-            <label for="jugador1">Jugador 1:
-                <select name="jugador1" id="jugador1">
+            <div class="mb-3">
+                <label for="nombre_combate" class="form-label">Proporcione un nombre a esta épica batalla:</label>
+                <input type="text" name="nombre_combate" id="nombre_combate" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="jugador1" class="form-label">Jugador 1:</label>
+                <select name="jugador1" id="jugador1" class="form-select" required onchange="cargarEstadisticas(this.value, 'jugador1')">
+                    <option value="">Seleccione un personaje</option>
                     {% for personaje in personajes %}
                         <option value="{{ personaje.id }}">{{ personaje.nombre }}</option>
                     {% endfor %}
                 </select>
-            </label>
-            <br><br>
-            <label for="jugador2">Jugador 2:
-                <select name="jugador2" id="jugador2">
+                <div id="estadisticas-jugador1" class="estadisticas mt-3">
+                    <p><strong>Nombre:</strong> <span id="nombre-jugador1"></span></p>
+                    <p><strong>Victorias:</strong> <span id="victorias-jugador1"></span></p>
+                    <p><strong>Derrotas:</strong> <span id="derrotas-jugador1"></span></p>
+                    <p><strong>Salud:</strong> <span id="salud-jugador1"></span></p>
+                    <p><strong>Mana:</strong> <span id="mana-jugador1"></span></p>
+                    <p><strong>Arma:</strong> <span id="arma-jugador1"></span></p>
+                    <p><strong>Facción:</strong> <span id="faccion-jugador1"></span></p>
+                    <p><strong>Ubicación:</strong> <span id="ubicacion-jugador1"></span></p>
+                    <p><strong>Ratio de victorias:</strong> <span id="ratio-jugador1"></span></p>
+                    <img id="foto-jugador1" src="" alt="Foto del personaje" style="max-width: 300px;">
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="jugador2" class="form-label">Jugador 2:</label>
+                <select name="jugador2" id="jugador2" class="form-select" required onchange="cargarEstadisticas(this.value, 'jugador2')">
+                    <option value="">Seleccione un personaje</option>
                     {% for personaje in personajes %}
                         <option value="{{ personaje.id }}">{{ personaje.nombre }}</option>
                     {% endfor %}
                 </select>
-            </label>
-            <br><br>
-            <button type="submit">Empezar combate</button>
+                <div id="estadisticas-jugador2" class="estadisticas mt-3">
+                    <p><strong>Nombre:</strong> <span id="nombre-jugador2"></span></p>
+                    <p><strong>Victorias:</strong> <span id="victorias-jugador2"></span></p>
+                    <p><strong>Derrotas:</strong> <span id="derrotas-jugador2"></span></p>
+                    <p><strong>Salud:</strong> <span id="salud-jugador2"></span></p>
+                    <p><strong>Mana:</strong> <span id="mana-jugador2"></span></p>
+                    <p><strong>Arma:</strong> <span id="arma-jugador2"></span></p>
+                    <p><strong>Facción:</strong> <span id="faccion-jugador2"></span></p>
+                    <p><strong>Ubicación:</strong> <span id="ubicacion-jugador2"></span></p>
+                    <p><strong>Ratio de victorias:</strong> <span id="ratio-jugador2"></span></p>
+                    <img id="foto-jugador2" src="" alt="Foto del personaje" style="max-width: 300px;">
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-danger mt-4">Empezar combate</button>
         </form>
     </div>
 
     <script>
-        function CancionRandom() {
-            let songs = [
-                "{% static 'music/pre_combate1.mp3' %}",
-            ];
+   function CancionRandom() {
+      let songs = [
+            "{% static 'music/pre_combate1.mp3' %}"
+        ];
 
-            let boton = document.getElementById("btn_control");
-            let random = Math.floor(Math.random() * songs.length);
-            let reproductor = document.getElementById("reproductor");
-            reproductor.src = songs[random];
-            reproductor.play();
+       let boton = document.getElementById("btn_control");
+       let random = Math.floor(Math.random() * songs.length);
+       let reproductor = document.getElementById("reproductor");
+       reproductor.src = songs[random];
+       reproductor.play();
 
-            if (boton.style.display === "none") {
-                boton.style.display = "block";
+       if (boton.style.display === "none") {
+           boton.style.display = "block";
+       }
+       if (boton.textContent === "Reanudar música") {
+           boton.textContent = "Detener música";
+       }
+   }
+
+   function control_reproductor() {
+       let reproductor = document.getElementById("reproductor");
+       let boton = document.getElementById("btn_control");
+
+       if (!reproductor.paused) {
+           reproductor.pause();
+           boton.textContent = "Reanudar música";
+       } else {
+           reproductor.play();
+           boton.textContent = "Detener música";
+       }
+   }
+        async function cargarEstadisticas(personajeId, jugador) {
+            const estadisticasDiv = document.getElementById(`estadisticas-${jugador}`);
+
+            if (!personajeId) {
+                estadisticasDiv.style.display = 'none';
+                return;
             }
-            if (boton.textContent === "Reanudar música") {
-                boton.textContent = "Detener música";
-            }
-        }
 
-        function control_reproductor() {
-            let reproductor = document.getElementById("reproductor");
-            let boton = document.getElementById("btn_control");
+            try {
+                const response = await fetch(`/api/personaje/${personajeId}/estadisticas/`);
+                const data = await response.json();
 
-            if (!reproductor.paused) {
-                reproductor.pause();
-                boton.textContent = "Reanudar música";
-            } else {
-                reproductor.play();
-                boton.textContent = "Detener música";
+                document.getElementById(`nombre-${jugador}`).textContent = data.nombre;
+                document.getElementById(`victorias-${jugador}`).textContent = data.victorias;
+                document.getElementById(`derrotas-${jugador}`).textContent = data.derrotas;
+                document.getElementById(`salud-${jugador}`).textContent = data.salud;
+                document.getElementById(`mana-${jugador}`).textContent = data.mana;
+                document.getElementById(`arma-${jugador}`).textContent = data.arma;
+                document.getElementById(`faccion-${jugador}`).textContent = data.faccion;
+                document.getElementById(`ubicacion-${jugador}`).textContent = data.ubicacion;
+                document.getElementById(`ratio-${jugador}`).textContent = `${data.ratio_victorias}%`;
+                document.getElementById(`foto-${jugador}`).src = data.foto || '';
+
+                estadisticasDiv.style.display = 'block';
+            } catch (error) {
+                console.error('Error al cargar las estadísticas:', error);
             }
         }
     </script>
