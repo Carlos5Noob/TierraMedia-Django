@@ -1,15 +1,23 @@
+    @font-face {
+        font-family: "InglesAntiguo";
+        src: url("../fonts/OldLondon.ttf");
+    }
 
-@font-face {
-    font-family: "InglesAntiguo";
-    src: url("../fonts/OldLondon.ttf");
-}
+    h1 {
+        font-family: "InglesAntiguo", Serif;
+        font-style: italic;
+        font-weight: bold;
+        font-size: 80px;
+        text-align: center;
+        color: lightgoldenrodyellow;
+    }
 
-h1 {
-    font-family: "InglesAntiguo", Serif;
-    font-style: italic;
-    font-weight: bold;
-    font-size: 80px;
-    text-align: center;
-    color: lightgoldenrodyellow;
-}
+    header {
+        background-color: #1D1D1D;
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: start;
+    }
 
