@@ -40,6 +40,8 @@ class Personaje(models.Model):
     """
     nombre = models.CharField(max_length=120)
     salud = models.IntegerField()
+    victorias = models.IntegerField(default=0)
+    derrotas = models.IntegerField(default=0)
     mana = models.IntegerField(default=400)
     arma = models.ForeignKey(Arma, on_delete=models.CASCADE)
     faccion = models.ForeignKey(Faccion, on_delete=models.CASCADE, null=True, blank=True)
