@@ -451,3 +451,16 @@ def crear_personaje(request):
         "facciones": facciones,
         "ubicaciones": ubicaciones
     })
+
+class RegistroCombates(LoginRequiredMixin, ListView):   
+    """
+    Vista para el registro de combates.
+    """
+    model = Combate
+    template_name = "app/registro-combates.html"
+    context_object_name = "combates"
+
+    def get_queryset(self):
+        return Combate.objects.filter(nombre__isnull=False).exclude(nombre="").filter(turnos__gt=0) 
+        # excluimos los combates sin nombre y los combates sin turnos
+    
