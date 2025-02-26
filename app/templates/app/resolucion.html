@@ -36,14 +36,14 @@
 
         {% if resolucion_1 %}
             {% if combate.turnos <= 1 %}
-                <p>{{ combate.luchador_1 }} se encuentra demasiado cansado para luchar,debería ir a la taberna a descansar</p>
+                <p>{{ combate.luchador_1 }} ha sido derrotado con facilidad, debería ir a la taberna a descansar</p>
             {% else %}
-                <h2>Tras una ardua batalla... {{ resolucion_1 }}</h2>
+                <h2>Tras una ardua batalla... {{ resolucion_1 }}...</h2>
             {% endif %}
         {% endif %}
         {% if resolucion_2 %}
             {% if combate.turnos <= 1 %}
-                <h2>{{ combate.luchador_2 }} no estaba en condiciones de luchar, que decepción...</h2>
+                <h2>{{ combate.luchador_2 }} ha sido derrotado con facilidad, bravo!!</h2>
             {% else %}
                 <h2>Tras una ardua batalla... {{ resolucion_2 }}!!</h2>
             {% endif %}
@@ -60,7 +60,6 @@
         function CancionRandom() {
             let songs = [
                 "{% static 'music/Goku_SSJ.mp3' %}",
-                "{% static 'music/Gogeta_AS.mp3' %}",
                 "{% static 'music/Broly_Revival.mp3' %}"
             ];
 
