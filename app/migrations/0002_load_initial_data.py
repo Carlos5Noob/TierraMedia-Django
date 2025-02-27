@@ -33,14 +33,14 @@ def poblar_personajes(apps, schema_editor):
     Arma = apps.get_model('app', 'Arma')
 
     # Creamos las facciones
-    hombres_del_oeste = Faccion.objects.create(nombre='Hombres del Oeste', descripcion='Hombres nobles y valientes.')
-    elfos = Faccion.objects.create(nombre='Elfos', descripcion='Seres longevos y sabios de los bosques y montañas.')
+    arda = Faccion.objects.create(nombre='Arda', descripcion='Hombres nobles y valientes.')
+    nemesis = Faccion.objects.create(nombre='Némesis', descripcion='Seres longevos y sabios de la oscuridad.')
     # Creamos las ubicaciones
-    minas_tirith = Ubicacion.objects.create(nombre='Minas Tirith', descripcion='La majestuosa ciudad de los hombres, capital de Gondor.')
-    rivendel = Ubicacion.objects.create(nombre='Rivendel', descripcion='La casa de los Elfos, un refugio de sabiduría y belleza.')
+    amon_hen = Ubicacion.objects.create(nombre='Amon Hen', descripcion='La majestuosa ciudad de los hombres, capital de Gondor.')
+    casas_curacion = Ubicacion.objects.create(nombre='Las Casas de la Curación', descripcion='La casa de los Elfos, un refugio de sabiduría y belleza.')
     # Creamos las armas
-    anduril = Arma.objects.create(nombre='Andúril', dano=60, critico=10)
-    flecha_negra = Arma.objects.create(nombre='Flecha negra', dano=20, critico=100)
+    angrist = Arma.objects.create(nombre='Angrist', dano=40, critico=30)
+    orcrist = Arma.objects.create(nombre='Orcrist', dano=70, critico=15)
 
 
     # Creamos los personajes
@@ -50,9 +50,9 @@ def poblar_personajes(apps, schema_editor):
         victorias=10,
         derrotas=5,
         mana=50,
-        arma=anduril,
-        faccion=hombres_del_oeste,
-        ubicacion=minas_tirith,
+        arma=angrist,
+        faccion=arda,
+        ubicacion=amon_hen,
         foto='aragorn.jpg'
     )
 
@@ -62,9 +62,9 @@ def poblar_personajes(apps, schema_editor):
         victorias=5,
         derrotas=10,
         mana=70,
-        arma=flecha_negra,
-        faccion=elfos,
-        ubicacion=rivendel,
+        arma=orcrist,
+        faccion=nemesis,
+        ubicacion=casas_curacion,
         foto='legolas.jpg'
     )
 
